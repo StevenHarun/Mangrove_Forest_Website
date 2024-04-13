@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    /* Background image */
+    background-image: url('/images/bg_dashboard.jpg'); /* Adjust the path as needed */
+    /* Background size and position */
+    background-size: cover;
+    background-position: center;
+    /* Background color with transparency */
+    background-color: rgba(255, 255, 255, 0.5); /* Change the value to adjust transparency */
+}
