@@ -20,18 +20,22 @@
             background-size: cover;
             /* Add other background styles here */
         }
+        .custom-rectangle {
+            position: absolute;
+            height: 100vh;
+            width: calc(100% - 85%);
+            margin-left: 45%;
+            background-color: #B5DB9E;
+        }
     </style>
 </head>
+<div class="custom-rectangle"></div>
 <body class="font-sans text-gray-900 antialiased min-h-screen bg-gray-100 custom-bg">
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-        <div>
-            {{-- <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a> --}}
-        </div>
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div class="w-3/5 mt- px-6 py-4 bg-white shadow-md overflow-hidden rounded-lg" style="background-color: #F6FAE9; height: 100vh; width: 40%; margin-left: 60%;">
             {{ $slot }}
         </div>
+        
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

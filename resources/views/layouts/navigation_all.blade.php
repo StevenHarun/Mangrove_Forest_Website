@@ -28,12 +28,23 @@
                 </div>
             </div>
             <!-- Login Button -->
-            <div class="flex items-center space-x-8">
+            {{-- <div class="flex items-center space-x-8">
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex relative z-10">
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')" class="nav-link font-bold">
                         {{ __('LOGIN') }}
                     </x-nav-link>
+                </div> --}}
+            <div class="flex items-center space-x-8">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex relative z-10">
+                    @guest <!-- Cek apakah pengguna belum login -->
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')" class="nav-link font-bold">
+                            {{ __('LOGIN') }}
+                        </x-nav-link>
+                    @else <!-- Jika pengguna sudah login -->
+                        <a href="{{ route('home') }}" class="nav-link font-bold">{{ Auth::user()->name }}</a>
+                    @endguest
                 </div>
+            </div>
                 <!-- Hamburger -->
                 <div class="-me-2 flex items-center sm:hidden">
                     <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
