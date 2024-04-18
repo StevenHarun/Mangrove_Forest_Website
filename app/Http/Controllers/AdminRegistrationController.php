@@ -14,6 +14,11 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 class AdminRegistrationController extends Controller
+
+// 
+//  TIDAK TERPAKAI. PERLU DI EDIT LAGI
+// 
+
 {   
     /**
      * Display the registration view.
@@ -28,34 +33,34 @@ class AdminRegistrationController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required','in:Pemda,User'] // Tambahkan validasi untuk role
-        ]);
+    // public function store(Request $request): RedirectResponse
+    // {
+    //     $request->validate([
+    //         'name' => ['required', 'max:255'],
+    //         'email' => ['required', 'email', 'max:255', 'unique:'.User::class],
+    //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    //         'role' => ['required','in:Pemda,User'] // Tambahkan validasi untuk role
+    //     ]);
 
-        // Pastikan role yang diinginkan adalah Admin yang melakukan registrasi
-        if ($request->user()->role !== 'Admin') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki izin untuk melakukan registrasi.');
-        }
+    //     // Pastikan role yang diinginkan adalah Admin yang melakukan registrasi
+    //     if ($request->user()->role !== 'Admin') {
+    //         return redirect()->back()->with('error', 'Anda tidak memiliki izin untuk melakukan registrasi.');
+    //     }
 
-        // Buat pengguna baru dengan peran yang ditentukan
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'password' => Hash::make($request->password),
-        ]);
+    //     // Buat pengguna baru dengan peran yang ditentukan
+    //     $user = User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'role' => $request->role,
+    //         'password' => Hash::make($request->password),
+    //     ]);
 
-        event(new Registered($user));
-        // event(new Registered($user));
+    //     event(new Registered($user));
+    //     // event(new Registered($user));
 
-        // Redirect ke halaman atau berikan respons yang sesuai
-        // return redirect()->route('home')->with('success', 'User berhasil ditambahkan!');
-        // dd('Regist Berhasil');
-        dd('adminRegist');
-    }
+    //     // Redirect ke halaman atau berikan respons yang sesuai
+    //     // return redirect()->route('home')->with('success', 'User berhasil ditambahkan!');
+    //     // dd('Regist Berhasil');
+    //     dd('adminRegist');
+    // }
 }
