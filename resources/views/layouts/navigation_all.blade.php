@@ -28,12 +28,6 @@
                 </div>
             </div>
             <!-- Login Button -->
-            {{-- <div class="flex items-center space-x-8">
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex relative z-10">
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')" class="nav-link font-bold">
-                        {{ __('LOGIN') }}
-                    </x-nav-link>
-                </div> --}}
             <div class="flex items-center space-x-8">
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex relative z-10">
                     @guest <!-- Cek apakah pengguna belum login -->
