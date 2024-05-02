@@ -22,7 +22,7 @@
                 <h2 class="text-center text-3xl mb-3 text-gray-700">YEAR DETAILS</h2>
 
                 <!-- Form Registrasi -->
-                <form method="POST" action="/year/{{$year->id}}">
+                <form method="POST" action="{{ route('year.update', $year->id) }}">
                     @csrf
                     @method('patch')
 

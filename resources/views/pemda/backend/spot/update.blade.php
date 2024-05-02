@@ -22,7 +22,7 @@
                     <h2 class="text-center text-3xl mb-3 text-gray-700">LOCATIONS DETAILS</h2>
 
                     <!-- Form Registrasi -->
-                    <form method="POST" action="/spot/{{$spot->id}}">
+                    <form method="POST" action="{{ route('spot.update', $spot->id) }}">
                         @csrf
                         @method('patch')
 
@@ -65,9 +65,28 @@
                         </div>
 
                         <!-- fillColor -->
-                        <div class="mt-4 grid grid-cols-2">
+                        <!-- <div class="mt-4 grid grid-cols-2">
                             <label for="fillColor" class="text-gray-700">Fill Color</label>
                             <x-text-input id="fillColoe" class="block mt-1 w-full" type="color" name="fillColor" value="{{$spot->fillColor}}" required autocomplete="fillColor" />
+                            <x-input-error :messages="$errors->get('fillColor')" class="mt-2" />
+                        </div> -->
+
+                        <div class="mt-4 grid grid-cols-2">
+                            <p class="text-gray-700"">Fill Color</p>
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <x-text-input id="fillColor" value="#65B741" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="fillColor" required autocomplete="fillColor" />
+                                    <label for="fillColor" class="ms-2 font-medium text-gray-700">High fertility</label>
+                                </div>
+                                <div class="flex items-center mb-4">
+                                    <x-text-input id="fillColor" value="#FFFEC4" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="fillColor" required autocomplete="fillColor" />
+                                    <label for="fillColor" class="ms-2 font-medium text-gray-700">Medium fertility</label>
+                                </div>
+                                <div class="flex items-center mb-4">
+                                    <x-text-input id="fillColor" value="#FFCF81" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="fillColor" required autocomplete="fillColor" />
+                                    <label for="fillColor" class="ms-2 font-medium text-gray-700">Low fertility</label>
+                                </div>
+                            </div>
                             <x-input-error :messages="$errors->get('fillColor')" class="mt-2" />
                         </div>
 

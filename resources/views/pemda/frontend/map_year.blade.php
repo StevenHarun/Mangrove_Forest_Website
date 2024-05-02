@@ -20,30 +20,19 @@
                 </div> -->
                 <div class="flex justify-between p-2">
                     <div class="z-20">
-                        <div class="sm:flex sm:items-center sm:ms-6">
-                            <x-dropdown>
-                                <x-slot name="trigger">
-                                    <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
-                                        <div>{{ __('Filter tahun') }}</div>
-
-                                        <div class="ms-1">
-                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </x-slot>
-
-                                <x-slot name="content">
-                                    @foreach ($years as $year)
-                                    <x-dropdown-link :href="route('map_year', $year->id)">
-                                        {{ $year->year }}
-                                    </x-dropdown-link>
-                                    @endforeach
-                                </x-slot>
-                            </x-dropdown>
-                        </div>
                         
+                    </div>
+                    <div class="">
+                        <!-- <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
+                            <x-link :href="route('year')">
+                                {{ __('Manage Year') }}
+                            </x-link> 
+                        </button>
+                        <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
+                            <x-link :href="route('spot')">
+                                {{ __('Manage Spot') }}
+                            </x-link> 
+                        </button> -->
                     </div>
                 </div>
                 <div id="map" style="height: 500px;" class="z-10"></div>

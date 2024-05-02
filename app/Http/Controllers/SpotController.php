@@ -32,7 +32,7 @@ class SpotController extends Controller
         $spot->getYear()->sync($req->year_id);  
 
 
-        return redirect('/spot')->with('msg', 'Location has been added!');
+        return redirect('/locations/spot')->with('msg', 'Location has been added!');
     }
 
     public function update(Request $req, $id) {
@@ -47,7 +47,7 @@ class SpotController extends Controller
         $spot->getYear()->sync($req->year_id);  
 
 
-        return redirect('/spot')->with('msg', 'Location has been updated!');
+        return redirect('/locations/spot')->with('msg', 'Location has been updated!');
     }
 
     public function destroy($id) {
@@ -57,7 +57,7 @@ class SpotController extends Controller
         $spot->delete();
 
  
-        return redirect('/spot')->with('msg', 'Location has been deleted!');
+        return redirect('/locations/spot')->with('msg', 'Location has been deleted!');
     }
 
     public function details($param) {
