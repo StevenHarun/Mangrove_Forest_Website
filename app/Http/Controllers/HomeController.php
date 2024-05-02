@@ -96,7 +96,7 @@ class HomeController extends Controller
         $spot = $yearSpot->getSpot()->get();
         return view('pemda.frontend.map_year',[
             'spot' => $spot,
-            'categorySpot' => $yearSpot,
+            'yearSpot' => $yearSpot,
             // 'categories' => $this->categories
         ]);
     }

@@ -19,20 +19,8 @@
                     @endif --}}
                 </div> -->
                 <div class="flex justify-between p-2">
-                    <div class="z-20">
-                        
-                    </div>
-                    <div class="">
-                        <!-- <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
-                            <x-link :href="route('year')">
-                                {{ __('Manage Year') }}
-                            </x-link> 
-                        </button>
-                        <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
-                            <x-link :href="route('spot')">
-                                {{ __('Manage Spot') }}
-                            </x-link> 
-                        </button> -->
+                    <div class="text-2xl">
+                        <h1>Selected Year: {{$yearSpot->year}}</h1>
                     </div>
                 </div>
                 <div id="map" style="height: 500px;" class="z-10"></div>
