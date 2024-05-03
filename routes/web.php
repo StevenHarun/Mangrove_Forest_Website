@@ -34,21 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-// Route::get('/report', [ReportsController::class, 'index'])
-//     ->middleware('auth')
-//     ->name('report');
-// Route::get('/viewreport', [ReportsController::class, 'viewreport'])
-//     ->middleware('auth')
-//     ->name('viewreport');
-
-Route::middleware(['auth'])->group(function(){{ 
-    // Route::get('/report', [ReportsController::class, 'create'])->name('report.create');
     Route::get('/report', [ReportsController::class, 'create'])->name('report.create');
-    Route::post('/report', [ReportsController::class, 'store'])->name('report.report');
-    Route::get('/viewreport', [ReportsController::class, 'viewreport'])->name('viewreport');
-}});
+    Route::post('/report', [ReportsController::class, 'store'])->name('report.store');
+    Route::get('/viewreport', [ReportsController::class, 'viewReport'])->name('viewreport');
+});
 
 Route::post('/home', [AdminRegistrationController::class, 'store']);
 Route::post('/spot/create', [SpotController::class, 'store'])->name('spot.store');
@@ -56,10 +46,7 @@ Route::post('/year/create', [YearController::class, 'store'])->name('year.store'
 
 Route::get('/reports/{reportId}/image', [ReportsController::class, 'retrieveImage'])->name('reports.image');
 
-
-// Route::get('register', [RegisteredUserController::class, 'create'])
-//             ->name('register');
-
-// Route::post('register', [RegisteredUserController::class, 'store']);
+// Tambahkan rute untuk filter
+Route::get('/reports/filter/{category}', [ReportsController::class, 'filter'])->name('filter');
 
 require __DIR__.'/auth.php';

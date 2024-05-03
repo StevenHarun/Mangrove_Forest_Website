@@ -16,7 +16,7 @@
                         {{-- <h2 class="text-center text-3xl mb-3 text-gray-700">CREATE DAMAGE REPORT</h2> --}}
     
                         <!-- Form Registrasi -->
-                        <form enctype="multipart/form-data" action="{{ route('report.report') }}" method="POST" >
+                        <form enctype="multipart/form-data" action="{{ route('report.store') }}" method="POST" >
                             @csrf
                             <!-- Name -->
                             <div class="mt-4 grid grid-cols-2">

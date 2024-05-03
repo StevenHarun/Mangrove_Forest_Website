@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\reports;
+use App\Models\Reports; // Menggunakan nama model yang benar
 use Illuminate\View\View;
 
 class ReportsController extends Controller
@@ -39,7 +39,7 @@ class ReportsController extends Controller
             $imageBinary = file_get_contents($image->getPathname());
     
             // Store the image in the database as a BLOB
-            reports::create([
+            Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
                 'location' => $request->location,
@@ -48,7 +48,7 @@ class ReportsController extends Controller
                 'image' => $imageBinary, // Store the image as a BLOB
             ]);
         } else {
-            reports::create([
+            Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
                 'location' => $request->location,
@@ -72,5 +72,15 @@ class ReportsController extends Controller
         // Return the image as a response
         return response($report->image)
             ->header('Content-Type', 'image/jpeg'); // Adjust content type if necessary
+    }
+
+    // Tambahkan method filter untuk mengatur filter
+    public function filter($category)
+    {
+        // Lakukan query berdasarkan kategori yang dipilih
+        $reports = Reports::where('category', $category)->get();
+
+        // Kirim data ke view
+        return view('report.viewreport', compact('reports'));
     }
 }
