@@ -30,10 +30,23 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="nav-link font-bold">
-                        {{ __('REPORTS') }}
-                    </x-nav-link>
-                </div>
+                    <!-- Tombol Dropdown -->                        
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="nav-link font-bold text-gray-700 font-bold focus:outline-none">
+                            {{ __('REPORTS') }}
+                        </button>
+                
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown" class="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 mt-8">
+                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                                <li>
+                                    <a href="{{ route('report.create') }}" class="block px-4 py-2 hover:bg-gray-100">Buat Laporan</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('viewreport') }}" class="block px-4 py-2 hover:bg-gray-100">Lihat Laporan</a>
+                                </li>
+                            </ul>
+                        </div>
+                </div>                
             </div>
 
             <!-- Settings Dropdown -->
@@ -116,3 +129,23 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Ambil tombol dropdown dan dropdown menu
+        const dropdownButton = document.getElementById('dropdownDefaultButton');
+        const dropdownMenu = document.getElementById('dropdown');
+
+        // Tambahkan event listener untuk menampilkan atau menyembunyikan dropdown saat tombol ditekan
+        dropdownButton.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        // Sembunyikan dropdown saat klik di luar dropdown menu
+        document.addEventListener('click', function (event) {
+            if (!dropdownMenu.contains(event.target) && !dropdownButton.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    });
+</script>
