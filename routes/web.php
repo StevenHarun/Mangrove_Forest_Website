@@ -45,6 +45,7 @@ Route::post('/spot/create', [SpotController::class, 'store'])->name('spot.store'
 Route::post('/year/create', [YearController::class, 'store'])->name('year.store');
 
 Route::get('/reports/{reportId}/image', [ReportsController::class, 'retrieveImage'])->name('reports.image');
+Route::delete('/report/{id}', [ReportsController::class, 'destroy'])->middleware('auth')->name('report.destroy');
 
 // Tambahkan rute untuk filter
 Route::get('/reports/filter/{category}', [ReportsController::class, 'filter'])->name('filter');

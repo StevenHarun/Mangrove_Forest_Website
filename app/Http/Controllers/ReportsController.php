@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Reports; // Menggunakan nama model yang benar
 use Illuminate\View\View;
@@ -56,6 +57,8 @@ class ReportsController extends Controller
                 'description' => $request->description,
             ]);
         }
+
+        Session::flash('success', 'Laporan berhasil ditambahkan.');
     
         return view('report.report');
     }
@@ -82,5 +85,13 @@ class ReportsController extends Controller
 
         // Kirim data ke view
         return view('report.viewreport', compact('reports'));
+    }
+
+    public function destroy($id)
+    {
+    $report = Reports::findOrFail($id);
+    $reportTitle = $report->report_title;
+    $report->delete();
+    return back()->with('success', 'Laporan "' . $reportTitle . '" berhasil dihapus.');
     }
 }

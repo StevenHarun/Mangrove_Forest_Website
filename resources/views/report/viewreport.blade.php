@@ -31,6 +31,43 @@
             background-color: #C6F6D5;
             border-color: #10B981;
         }
+
+        /* Styling for the card */
+        .card {
+            background-color: #FFFFFF; /* Warna putih */
+            border: 1px solid #E5E7EB; /* Warna border */
+            border-radius: 2.975rem; /* Sudut bulat */
+            padding: 1rem; /* Spasi dalam kartu */
+            width: 100%; /* Lebar card */
+            display: flex;
+            flex-wrap: wrap; /* Mengizinkan pembungkusan flex */
+            margin-bottom: 20px; /* Margin antara setiap card */
+        }
+
+        /* Styling for the layer below the card */
+        .layer {
+            background-color: #F4F4F4; /* Warna abu-abu muda */
+            border-radius: 3.375rem; /* Sudut bulat */
+            padding: 1rem; /* Spasi dalam lapisan */
+            margin-top: 1rem; /* Spasi atas */
+        }
+
+        /* Styling for text inside the card */
+        .left-elements {
+            flex: 1; /* Menyusun elemen-elemen di sebelah kiri */
+        }
+
+        .right-elements {
+            flex: 1; /* Menyusun elemen-elemen di sebelah kanan */
+            text-align: right; /* Teks di kanan */
+        }
+
+        /* Styling for the line separator */
+        .line {
+            width: 100%; /* Lebar garis */
+            border-bottom: 1px solid #E5E7EB; /* Garis horizontal */
+            margin: 1rem 0; /* Jarak antara garis dan deskripsi */
+        }
     </style>
 
     <!-- Content -->
@@ -44,41 +81,66 @@
                     </div>
 
                     <!-- Filter Buttons -->
-                    <div class="flex justify-center mt-4">
-                        <a href="{{ route('filter', 'penghijauan') }}" class="custom-button penghijauan mr-4">Penghijauan</a>
-                        <a href="{{ route('filter', 'kerusakan') }}" class="custom-button kerusakan">Kerusakan</a>
-                    </div>
-
-                    <!-- Card for each report -->
-                    @foreach ($reports as $key => $report)
-                    <div class="flex items-center justify-between px-4 py-2 mt-4">
-                        <div class="flex flex-col">
-                            <div class="text-gray-700 text-2xl font-bold">{{ $report->report_title }}</div>
-                            <div class="text-m text-gray-500">Category: 
-                                <span class="@if($report->category == 'Kerusakan') category-kerusakan @elseif($report->category == 'Penghijauan') category-penghijauan @endif">
-                                    {{ $report->category }}
-                                </span>
-                            </div> <!-- Styling hanya untuk tulisan kategori -->
-                            <div class="text-m text-gray-500">Location: {{ $report->location }}</div> 
-                            <div class="text-m text-gray-500">Date: {{ $report->date }}</div>
-                            <div class="text-m text-gray-500">Deskripsi: {{ $report->description }}</div>
-                        </div>
-                        <div>
-                            <!-- Display Image -->
-                            @if ($report->image)
-                                <a href="{{ route('reports.image', $report->id) }}" class="view-image">View</a>
-                            @else
-                                No image
-                            @endif
-                        </div>
+                    <div class="flex justify-center mt-4 ">
+                        <a href="{{ route('filter', 'penghijauan') }}" class="custom-button penghijauan mr-1 font-bold">Penghijauan</a>
+                        <a href="{{ route('filter', 'kerusakan') }}" class="custom-button kerusakan font-bold">Kerusakan</a>
                     </div>
                     
-                    @endforeach
+                    @if (session('success'))
+                        <div class="bg-orange-100 border border-orange-400 text-red-700 px-4 py-3 rounded relative mt-3" role="alert">
+                            <strong class="font-bold">Dihapus!</strong>
+                            <span class="block sm:inline">{{ session('success') }}</span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                                <button onclick="this.parentElement.style.display='none'" class="text-red-500 hover:text-red-700 focus:outline-none">
+                                    <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1 1 0 01-1.414 0L10 11.414l-2.93 2.435a1 1 0 01-1.456-1.374l3.333-2.777a1 1 0 011.192 0l3.333 2.777a.997.997 0 010 1.457z"/></svg>
+                                </button>
+                            </span>
+                        </div>
+                    @endif
+
+
+                    <div class="layer">    <!-- Card for each report -->
+                        @foreach ($reports as $key => $report)
+                        <div class="card">
+                            <div class="left-elements">
+                                <div class="report-title font-bold text-3xl ml-4 mt-1">{{ $report->report_title }}</div>
+                                <div class="location ml-4 text-xl">Location: {{ $report->location }}</div>
+                            </div>
+                            <div class="right-elements">
+                                <div class="date text-xl font-bold mr-4">{{ Carbon\Carbon::parse($report->date)->format('d F Y') }}
+                                </div> 
+                                <div class="category font-bold mr-4 mt-1 mb-1"> 
+                                    <span class="@if($report->category == 'Kerusakan') category-kerusakan @elseif($report->category == 'Penghijauan') category-penghijauan @endif">
+                                        {{ $report->category }}
+                                    </span>
+                                </div>
+                                <div class="view font-bold mb-1 mt-1"> 
+                                    @if ($report->image)
+                                        <a href="{{ route('reports.image', $report->id) }}" class="bg-blue-500 hover:bg-blue-70 font-bold py-1 px-3 rounded-full ml-2 text-white ">View Evidence</a>
+                                    @else
+                                        <p class="mr-4">No image</class>
+                                    @endif
+                                </div>
+                                {{-- delete button --}}
+                                <form action="{{ route('report.destroy', $report->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-full ml-2 mr">Hapus Laporan</button>
+                                </form>
+                            </div>
+                            <hr class="line"> <!-- Garis separator -->
+                            <div class="description text-l mb-2 ml-4 mr-4"> Description : {{ $report->description }}</div> <!-- Deskripsi -->
+                        </div>
+                        @endforeach
+
+                    <!-- Layer below the card -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
