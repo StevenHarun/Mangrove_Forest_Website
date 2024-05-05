@@ -58,7 +58,7 @@ class ReportsController extends Controller
             ]);
         }
 
-        Session::flash('success', 'Laporan berhasil ditambahkan.');
+        Session::flash('successes', 'Laporan berhasil ditambahkan.');
     
         return view('report.report');
     }
@@ -94,4 +94,5 @@ class ReportsController extends Controller
     $report->delete();
     return back()->with('success', 'Laporan "' . $reportTitle . '" berhasil dihapus.');
     }
+
 }

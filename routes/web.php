@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SpotController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Middleware\CheckUserRole;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,7 +18,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
     Route::get('/locations', [HomeController::class, 'locations'])->middleware('auth')->name('locations');
     Route::get('/spot', [HomeController::class, 'spot'])->middleware('auth')->name('spot');
@@ -35,9 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/report', [ReportsController::class, 'create'])->name('report.create');
-    Route::post('/report', [ReportsController::class, 'store'])->name('report.store');
-    Route::get('/viewreport', [ReportsController::class, 'viewReport'])->name('viewreport');
+    Route::get('/report', [ReportsController::class, 'create'])->middleware(CheckUserRole::class . ':Pemda,User')->name('report.create');
+    Route::post('/report', [ReportsController::class, 'store'])->middleware(CheckUserRole::class . ':Pemda,User')->name('report.store');
+    Route::get('/viewreport', [ReportsController::class, 'viewReport'])->middleware(CheckUserRole::class . ':Pemda,User')->name('viewreport');
 });
 
 Route::post('/home', [AdminRegistrationController::class, 'store']);
@@ -46,6 +47,13 @@ Route::post('/year/create', [YearController::class, 'store'])->name('year.store'
 
 Route::get('/reports/{reportId}/image', [ReportsController::class, 'retrieveImage'])->name('reports.image');
 Route::delete('/report/{id}', [ReportsController::class, 'destroy'])->middleware('auth')->name('report.destroy');
+
+// Route::middleware(['auth', 'role:user,pemda'])->group(function () {
+//     Route::get('/report', [ReportsController::class, 'create'])->name('report.create');
+//     Route::post('/report', [ReportsController::class, 'store'])->name('report.store');
+//     Route::get('/viewreport', [ReportsController::class, 'viewReport'])->name('viewreport');
+// });
+
 
 // Tambahkan rute untuk filter
 Route::get('/reports/filter/{category}', [ReportsController::class, 'filter'])->name('filter');
