@@ -18,9 +18,6 @@
                 <!-- Table -->
                 <div class="bg-white rounded-lg shadow-lg px-4 py-6">
 
-                    <!-- Button back -->
-                    <a href="{{ url()->previous() }}" class="underline" >Back</a>
-
                     <!-- Title 'Locations DETAILS' -->
                     <h2 class="text-center text-3xl mb-3 text-gray-700">LOCATIONS DETAILS</h2>
 
@@ -70,7 +67,7 @@
                         <!-- <div class="mt-4 grid grid-cols-2">
                             <abel for="fillCabel>
                             <x-text-input id="fisClColor" />
-                            <x-input-error :messages="$errors->get('fillColor')" class="mt-2" />
+                            <x-error :messages="$errors->get('fillColor')" class="mt-2" />
                         </div> -->
                         
                         <!-- fillColor -->
