@@ -8,16 +8,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg">
-                <!-- <div class="p-6 text-gray-900">
-                    {{-- Tambahkan tombol registrasi --}}
-                    {{-- @if (Ro::has('register'))
-                        < cs="mt
-                            < href="{{ router') }}" clasounded-md px-3 py-2 ng-1 ring-transpar transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            
-                            
-                        
-                    @endif
-                </div> -->
                 <div class="flex justify-between p-2">
                     <div class="text-2xl">
                         <h1>Selected Year: {{$yearSpot->year}}</h1>
