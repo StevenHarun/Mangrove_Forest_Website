@@ -10,10 +10,10 @@
             <div class="bg-white shadow-sm sm:rounded-lg">
                 <!-- <div class="p-6 text-gray-900">
                     {{-- Tambahkan tombol registrasi --}}
-                    {{-- @if (Route::has('register'))
-                        < class="mt-4">
-                            < href="{{ route('register') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                Regis
+                    {{-- @if (Ro::has('register'))
+                        < cs="mt
+                            < href="{{ routegister') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            
                             
                         
                     @endif --}}
