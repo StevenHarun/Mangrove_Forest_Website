@@ -69,7 +69,7 @@
                         <!-- fillColor -->
                         <!-- <div class="mt-4 grid grid-cols-2">
                             <label for="fillColor" class="text700">Fill Color</label>
-                            <x-text-input id="fills"block mt-1w-mlCoquired autocomplete="fillColor" />
+                            <x-text-input id="fills"block mt-1w-mlCoquautocomplete="fillColor" />
                             <x-input-error :messages="$errors->get('fillColor')" class="mt-2" />
                         </div> -->
                         
