@@ -12,7 +12,7 @@
                     {{-- Tambahkanegistrasi --}}
                     {{-- @if (Roregister'))
                         < class="mt-4">
-                            < href="{egi') }}" class="rounded-md pxck rinshover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            < href="{egi') }}" class="rounded-md pxckblack/7utline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Register
                             <
                         <
