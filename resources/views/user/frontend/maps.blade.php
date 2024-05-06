@@ -12,7 +12,7 @@
                     {{-- Tambahkan tombol registrasi --}}
                     {{-- @if (Route::has('register'))
                         < class="mt-4">
-                            <a href="{{ router') ="roundeding-1 ring-trble:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            <a href="{{ router') ="roundeding-1 ringg-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                             ister
                             </a>
                         <
