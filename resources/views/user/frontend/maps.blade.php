@@ -8,16 +8,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg">
-                <!-- <div class="p-6 text-gray-900">
-                    {{-- Tambahkan tombol registrasi --}}
-                    {{-- @if (Route::has('register'))
-                        < class="mt-4">
-                            <a href="{{ router') ="roundeding-1 rwxt-while:ring-white">
-                            ister
-                            </a>
-                        <
-                    @endif --}}
-                </div> -->
                 <div class="flex justify-between p-2">
                     <div class="z-20">
                         <div class="sm:flex sm:items-center sm:ms-6">
