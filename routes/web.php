@@ -39,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report', [ReportsController::class, 'create'])->middleware(CheckUserRole::class . ':Pemda,User')->name('report.create');
     Route::post('/report', [ReportsController::class, 'store'])->middleware(CheckUserRole::class . ':Pemda,User')->name('report.store');
     Route::get('/viewreport', [ReportsController::class, 'viewReport'])->middleware(CheckUserRole::class . ':Pemda,User')->name('viewreport');
+    // Route::get('/spot/create', [SpotController::class, 'create'])->middleware('auth')->name('spot.create');
+    
 });
 
 Route::post('/home', [AdminRegistrationController::class, 'store']);

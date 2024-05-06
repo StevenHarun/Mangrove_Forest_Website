@@ -2,7 +2,7 @@
     
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- <div class="p-5 text-gray-700"> --}}
                 {{-- <div class="max-w-md mx-auto">      --}}
                     <!-- Header Table -->
@@ -10,7 +10,7 @@
                         CREATE REPORT
                     </div>
                     <!-- Table -->
-                    <div class="bg-white rounded-lg shadow-lg px-4 py-1">
+                    <div class="bg-white rounded-lg shadow-lg px-4 py-1 mb-2 mr-2">
     
                         <!-- Title 'USER DETAILS' -->
                         {{-- <h2 class="text-center text-3xl mb-3 text-gray-700">CREATE DAMAGE REPORT</h2> --}}
@@ -72,7 +72,7 @@
                             
 
                             <!-- Tombol Register -->
-                            <div class="flex items-center justify-center mt-4">
+                            <div class="flex items-center justify-center mt-2 mb-1">
                                 <x-primary-button class="ms-4" style="background-color: #75B896; color: white;">
                                     {{ __('Add Report') }}
                                 </x-primary-button>

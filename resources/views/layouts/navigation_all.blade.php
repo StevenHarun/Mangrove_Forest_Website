@@ -3,9 +3,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <div class="shrink-0 flex items-center mt-11">
+                <div class="shrink-0 flex items-center mt-1">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/Logo_Mangrove.png') }}" alt="Logo Mangrove" style="width: 250px; height: auto;">
+                        <img src="{{ asset('images/Logo_Mangrove_Crop.png') }}" alt="Logo Mangrove" style="width: 200px; height: auto;">
                     </a>
                 </div>
                 <!-- Navigation Links -->

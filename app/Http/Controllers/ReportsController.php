@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use App\Models\Reports; // Menggunakan nama model yang benar
+use Illuminate\Support\Str;
+use App\Models\Reports;
 use Illuminate\View\View;
+use App\Models\Spot;
+
 
 class ReportsController extends Controller
 {
@@ -30,7 +33,7 @@ class ReportsController extends Controller
             'description' => 'required|string', 
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
-    
+
         // Get the uploaded image
         $image = $request->file('image');
     
@@ -62,6 +65,19 @@ class ReportsController extends Controller
     
         return view('report.report');
     }
+
+    public function map(Request $req) {
+        $spot = new Spot();
+
+        $spot->slug = Str::slug($req->name);
+        $spot->coordinates = request('coordinates');
+        $spot->fillColor = request('fillColor');
+        $spot->save();
+        $spot->getYear()->sync($req->year_id);  
+
+        return redirect('/report')->with('msg', 'Location has been added!');
+    }
+
 
     public function retrieveImage($reportId)
     {

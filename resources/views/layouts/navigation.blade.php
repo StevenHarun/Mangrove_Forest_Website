@@ -10,9 +10,9 @@
                     {{-- </a> --}}
                 {{-- </div> --}}
 
-                <div class="shrink-0 flex items-center mt-11">
+                <div class="shrink-0 flex items-center mt-1">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/Logo_Mangrove.png') }}" alt="Logo Mangrove" style="width: 250px; height: auto;">
+                        <img src="{{ asset('images/Logo_Mangrove_Crop.png') }}" alt="Logo Mangrove" style="width: 200px; height: auto;">
                     </a>
                 </div>     
 
