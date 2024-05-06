@@ -62,13 +62,6 @@
                             <textarea name="coordinates" id="coordinates" cols="30" rows="10" readonly></textarea>
                             <x-input-error :messages="$errors->get('coordinates')" class="mt-2" />
                         </div>
-
-                        <!-- fillColor -->
-                        <!-- <div class="mt-4 grid grid-cols-2">
-                            <abel fCabel>
-                            <x-text-input id=lor" />
-                            <x-error :messages="$errors->get('fillColor')" class="mt-2" />
-                        </div> -->
                         
                         <!-- fillColor -->
                         <div class="mt-4 grid grid-cols-2">
