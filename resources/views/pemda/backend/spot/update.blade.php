@@ -65,7 +65,7 @@
                         </div>
 
                         <!-- fillColor -->
-                        <!-- <div class="mt-4 grid grid-cols-2">
+                        <!-- <div class="mt-4 grols-2">
                             <label for="fillColl Color</label>
                             <x-text-input id="fillCc-lor" name="fillColor" value="{{$spot->fillColor}}" required autocomplete="fillColor" />
                             <x-input-error :messages="$e('fillColor')" class="mt-2" />
