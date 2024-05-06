@@ -12,7 +12,7 @@
                     {{-- Tambahkan tombol registrasi --}}
                     {{-- @if (Route::has('register'))
                         < class="mt-4">
-                            <a href="{{ router') ="roundeding-1 rwhite dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            <a href="{{ router') ="roundeding-1 rwxt-white/80 dark:focus-visible:ring-white">
                             ister
                             </a>
                         <
