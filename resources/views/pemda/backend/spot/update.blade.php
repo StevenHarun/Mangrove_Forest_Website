@@ -64,13 +64,6 @@
                             <x-input-error :messages="$errors->get('coordinates')" class="mt-2" />
                         </div>
 
-                        <!-- fillColor -->
-                        <!-- <div cs-4 grols-2">
-                            <label for="Color</label>
-                            <x-text-inpe="fillColor" valuelColor}}tocomplete="fillColor" />
-                            <x-input-error :messages="$e('fillColor')" class="mt-2" />
-                        </div> -->
-
                         <div class="mt-4 grid grid-cols-2">
                             <p class="text-gray-700"">Fill Color</p>
                             <div>
