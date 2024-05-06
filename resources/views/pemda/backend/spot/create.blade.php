@@ -65,7 +65,7 @@
 
                         <!-- fillColor -->
                         <!-- <div class="mt-4 grid grid-cols-2">
-                            <abel for="fillCabel>
+                            <abel fCabel>
                             <x-text-input id=lor" />
                             <x-error :messages="$errors->get('fillColor')" class="mt-2" />
                         </div> -->
