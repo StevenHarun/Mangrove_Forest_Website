@@ -12,7 +12,7 @@
                     {{-- Tambahkan tombol registrasi --}}
                     {{-- @if (Ro::has('register'))
                         < cs="mt
-                            < href="{{ routegister') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            < href="{{ router') }}" clasounded-md px-3 py-2 ng-1 ring-transpar transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                             
                             
                         
