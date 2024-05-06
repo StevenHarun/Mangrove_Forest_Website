@@ -25,7 +25,7 @@ class SpotController extends Controller
 
         $spot->name = request('name');
         $spot->slug = Str::slug($req->name);
-        $spot->address = request('address');
+        $spot->description = request('description');
         $spot->coordinates = request('coordinates');
         $spot->fillColor = request('fillColor');
         $spot->save();
@@ -40,7 +40,7 @@ class SpotController extends Controller
 
         $spot->name = request('name');
         $spot->slug = Str::slug($req->name);
-        $spot->address = request('address');
+        $spot->description = request('description');
         $spot->coordinates = request('coordinates');
         $spot->fillColor = request('fillColor');
         $spot->update();

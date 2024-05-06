@@ -171,7 +171,7 @@
                             })
                             .bindPopup("<div class='my-2'><strong>Nama Lokasi:</strong> <br>{{ $data->name }}</div>" +
                                 "<div class='my-2'><strong>Tahun:</strong> <br>{{ $itemYear->year }}</div>" +
-                                "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->address }}</div>" 
+                                "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>" 
                             ).addTo(map);
                     @endforeach
                 @endforeach

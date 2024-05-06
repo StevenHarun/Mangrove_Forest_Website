@@ -35,11 +35,11 @@
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
-                        <!-- Address -->
+                        <!-- Description -->
                         <div class="mt-4 grid grid-cols-2">
-                            <label for="address" class="text-gray-700">Address</label>
-                            <textarea name="address" id="address" cols="30" rows="10"></textarea>
-                            <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                            <label for="description" class="text-gray-700">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                            <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
                         
                         <!-- Year -->
