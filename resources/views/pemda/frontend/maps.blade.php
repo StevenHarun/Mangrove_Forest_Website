@@ -8,16 +8,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg">
-                <!-- <div class=ray-900">
-                    {{-- Tambahkanegistrasi --}}
-                    {{-- @if (Roregister'))
-                        < class="mt-4">
-                            < href="{egi') }}" class="rounded-md pxckblack/7utline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                Register
-                            <
-                        <
-                    @endif --}}
-                </div> -->
                 <div class="flex justify-between p-2">
                     <div class="z-20">
                         <div class="sm:flex sm:items-center sm:ms-6">
