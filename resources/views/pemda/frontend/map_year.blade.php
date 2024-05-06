@@ -16,7 +16,7 @@
                             
                             
                         
-                    @endif --}}
+                    @endif
                 </div> -->
                 <div class="flex justify-between p-2">
                     <div class="text-2xl">
