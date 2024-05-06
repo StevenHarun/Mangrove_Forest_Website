@@ -18,9 +18,6 @@
                 <!-- Table -->
                 <div class="bg-white rounded-lg shadow-lg px-4 py-6">
 
-                    <!-- Button back -->
-                    <a href="{{ url()->previous() }}" class="underline" >Back</a>
-
                     <!-- Title 'Locations DETAILS' -->
                     <h2 class="text-center text-3xl mb-3 text-gray-700">LOCATIONS DETAILS</h2>
 
@@ -69,7 +66,7 @@
 
                         <!-- fillColor -->
                         <!-- <div class="mt-4 grid grid-cols-2">
-                            <label for="fillColor" class="text-gray-700">Fill Color</label>
+                            <label for="fillCoss="text-gray-700">Fill Color</label>
                             <x-text-input id="fillColoe" class="block mt-1 w-full" type="color" name="fillColor" value="{{$spot->fillColor}}" required autocomplete="fillColor" />
                             <x-input-error :messages="$errors->get('fillColor')" class="mt-2" />
                         </div> -->
