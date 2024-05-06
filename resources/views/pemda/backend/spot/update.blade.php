@@ -67,7 +67,7 @@
                         <!-- fillColor -->
                         <!-- <div class="mt-4 grols-2">
                             <label for="Color</label>
-                            <x-text-inpe="fillColor" value="{{$spot->fillColor}}" required autocomplete="fillColor" />
+                            <x-text-inpe="fillColor" valuelColor}}" required autocomplete="fillColor" />
                             <x-input-error :messages="$e('fillColor')" class="mt-2" />
                         </div> -->
 
