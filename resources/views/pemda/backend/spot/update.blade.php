@@ -65,7 +65,7 @@
                         </div>
 
                         <!-- fillColor -->
-                        <!-- <div class="mt-4 grols-2">
+                        <!-- <div cs-4 grols-2">
                             <label for="Color</label>
                             <x-text-inpe="fillColor" valuelColor}}tocomplete="fillColor" />
                             <x-input-error :messages="$e('fillColor')" class="mt-2" />
