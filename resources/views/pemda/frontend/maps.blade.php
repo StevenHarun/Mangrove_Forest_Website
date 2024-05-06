@@ -8,11 +8,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg">
-                <!-- <div class="p-6 text-gray-900">
-                    {{-- Tambahkan tombol registrasi --}}
-                    {{-- @if (Route::has('register'))
+                <!-- <div class="p-6-gray-900">
+                    {{-- Tambahkanol registrasi --}}
+                    {{-- @if (Route('register'))
                         < class="mt-4">
-                            < href="{egister') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            < href="{egi') }}" class="rounded-md pxck rinshover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Register
                             <
                         <
