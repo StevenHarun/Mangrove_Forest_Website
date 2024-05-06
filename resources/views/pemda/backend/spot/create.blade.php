@@ -68,7 +68,7 @@
 
                         <!-- fillColor -->
                         <!-- <div class="mt-4 grid grid-cols-2">
-                            <label for="fillColor" class="text700">Fill Color</label>
+                            <label for="fillColor" class="textFill Color</label>
                             <x-text-input id="fills"b mt-1w-mlClColor" />
                             <x-input-error :messages="$errors->get('fillColor')" class="mt-2" />
                         </div> -->
