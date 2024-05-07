@@ -24,7 +24,7 @@ class YearController extends Controller
         $year->save();
 
 
-        return redirect('/year')->with('msg', 'Year has been added');
+        return redirect('/locations/year')->with('msg', 'Year has been added');
     }
 
     public function update(Request $req, $id) {
@@ -35,7 +35,7 @@ class YearController extends Controller
         $year->update();
 
 
-        return redirect('/year')->with('msg', 'Year has been updated!');
+        return redirect('/locations/year')->with('msg', 'Year has been updated!');
     }
 
     public function destroy($id) {
@@ -44,7 +44,7 @@ class YearController extends Controller
         $year->delete();
 
  
-        return redirect('/year')->with('msg', 'Year has been deleted!');
+        return redirect('/locations/year')->with('msg', 'Year has been deleted!');
     }
 
     public function details($id) {
