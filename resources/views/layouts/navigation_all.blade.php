@@ -3,9 +3,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <div class="shrink-0 flex items-center mt-11">
+                <div class="shrink-0 flex items-center mt-1">
                     <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/Logo_Mangrove.png') }}" alt="Logo Mangrove" style="width: 250px; height: auto;">
+                        <img src="{{ asset('images/Logo_Mangrove_Crop.png') }}" alt="Logo Mangrove" style="width: 200px; height: auto;">
                     </a>
                 </div>
                 <!-- Navigation Links -->
@@ -28,12 +28,6 @@
                 </div>
             </div>
             <!-- Login Button -->
-            {{-- <div class="flex items-center space-x-8">
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex relative z-10">
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')" class="nav-link font-bold">
-                        {{ __('LOGIN') }}
-                    </x-nav-link>
-                </div> --}}
             <div class="flex items-center space-x-8">
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex relative z-10">
                     @guest <!-- Cek apakah pengguna belum login -->
