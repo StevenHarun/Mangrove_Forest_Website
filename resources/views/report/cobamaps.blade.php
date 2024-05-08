@@ -53,12 +53,13 @@
                                 <div id="map" style="height: 400px;"></div>
                             </div>
 
-                            <!-- Coordinates -->
-                        <div class="mt-4 grid grid-cols-2">
-                            <label for="coordinates" class="text-gray-700">Coordinates</label>
-                            <textarea name="coordinates" id="coordinates" cols="30" rows="10" readonly></textarea>
-                            <x-input-error :messages="$errors->get('coordinates')" class="mt-2" />
-                        </div>
+                                <!-- Coordinates -->
+                            <div class="mt-4 grid grid-cols-2">
+                                <label for="coordinates" class="text-gray-700">Coordinates</label>
+                                <textarea name="coordinates" id="coordinates" cols="30" rows="10" readonly></textarea>
+                                <x-input-error :messages="$errors->get('coordinates')" class="mt-2" />
+                            </div>
+                            
                             {{-- Date --}}
                             <div class="mt-4 grid grid-cols-2">
                                 <label for="date" class="text-gray-700">Date</label>
