@@ -54,7 +54,6 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
-                'location' => $request->location,
                 'coordinates' => $request->coordinates,
                 'date' => $request->date,
                 'description' => $request->description,
