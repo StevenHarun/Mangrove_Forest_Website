@@ -39,10 +39,10 @@
                         <div id="dropdown" class="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 mt-8">
                             <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                                 <li>
-                                    <a href="{{ route('report.create') }}" class="block px-4 py-2 hover:bg-gray-100">Buat Laporan</a>
+                                    <a href="{{ route('report.create') }}" class="block px-4 py-2 hover:bg-gray-100">Add Report</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('viewreport') }}" class="block px-4 py-2 hover:bg-gray-100">Lihat Laporan</a>
+                                    <a href="{{ route('viewreport') }}" class="block px-4 py-2 hover:bg-gray-100">Report History</a>
                                 </li>
                             </ul>
                         </div>
