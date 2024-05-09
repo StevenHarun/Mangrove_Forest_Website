@@ -16,6 +16,8 @@
                         </x-link>
                     </button>
                 </div>
+                <!-- Button back -->
+                <a href="{{ url()->previous() }}" class="p-2 underline" >Back</a>
                 <div class="p-2">
                     <table class="w-full">
                         <tr class="bg-[#DBEECB]">
@@ -30,11 +32,11 @@
                             <td class="text-center p-2">{{$year->year}}</td>
                             <td class="text-center p-2 flex justify-center items-center gap-2">
                                 <button class="inline-flex items-center px-4 py-1 text-white bg-[#FFC700] border border-transparent rounded-md hover:border-[#FFC700] hover:bg-white hover:text-[#FFC700] transition ease-in-out duration-150">
-                                    <a href="{{ url('year/details', $year->id), }}">
+                                    <a href="{{ route('year.details', $year->id), }}">
                                         {{ __('Update') }}
                                     </a>
                                 </button>
-                                <form action="{{ url('year', $year->id), }}" method="post">
+                                <form action="{{ route('year.destroy', $year->id), }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="inline-flex items-center px-4 py-1 text-white bg-[#E72929] border border-transparent rounded-md hover:border-[#E72929] hover:bg-white hover:text-[#E72929] transition ease-in-out duration-150">

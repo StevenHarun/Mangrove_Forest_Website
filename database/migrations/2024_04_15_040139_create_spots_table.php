@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->longText('address');
+            $table->longText('description');
             $table->longText('coordinates');
             $table->string('fillColor');
             $table->timestamps();

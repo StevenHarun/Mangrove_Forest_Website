@@ -11,7 +11,6 @@ class reports extends Model
     protected $fillable = [
         'report_title',
         'category',
-        'location',
         'coordinates',
         'date',
         'description',
