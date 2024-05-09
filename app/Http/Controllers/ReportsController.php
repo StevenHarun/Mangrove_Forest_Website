@@ -28,7 +28,6 @@ class ReportsController extends Controller
         $request->validate([ 
             'report_title' => 'required|string|max:255', 
             'category' => 'required|string|max:255', 
-            'location' => 'required|string|max:255', 
             'date' => 'required|date', 
             'description' => 'required|string', 
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
@@ -46,7 +45,7 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
-                'location' => $request->location,
+                'coordinates' => $request->coordinates,
                 'date' => $request->date,
                 'description' => $request->description,
                 'image' => $imageBinary, // Store the image as a BLOB
@@ -55,7 +54,7 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
-                'location' => $request->location,
+                'coordinates' => $request->coordinates,
                 'date' => $request->date,
                 'description' => $request->description,
             ]);

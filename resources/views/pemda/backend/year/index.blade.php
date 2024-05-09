@@ -16,8 +16,8 @@
                         </x-link>
                     </button>
                 </div>
-                <!-- Button back -->
-                <a href="{{ url()->previous() }}" class="p-2 underline" >Back</a>
+                {{-- <!-- Button back -->
+                <a href="{{ url()->previous() }}" class="p-2 underline" >Back</a> --}}
                 <div class="p-2">
                     <table class="w-full">
                         <tr class="bg-[#DBEECB]">
