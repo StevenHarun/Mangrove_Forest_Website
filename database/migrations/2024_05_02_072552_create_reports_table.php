@@ -16,7 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('report_title');
             $table->string('category');
+<<<<<<< Updated upstream
             $table->string('location');
+=======
+            $table->longText('coordinates');
+            $table->string('fillColor');
+>>>>>>> Stashed changes
             $table->date('date');
             $table->text('description');
             $table->timestamps();
