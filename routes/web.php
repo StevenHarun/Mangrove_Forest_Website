@@ -21,7 +21,23 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
     Route::get('/locations', [HomeController::class, 'locations'])->middleware('auth')->name('locations');
+ Steven
+ Updated upstream
+    Route::get('/spot', [HomeController::class, 'spot'])->middleware('auth')->name('spot');
+    Route::get('/spot/create', [SpotController::class, 'create'])->middleware('auth')->name('spot.create');
+    Route::get('/spot/details/{param}', [SpotController::class, 'details'])->middleware('auth')->name('spot.details');
+    Route::patch('/spot/{id}', [SpotController::class, 'update'])->middleware('auth')->name('spot.update');
+    Route::delete('/spot/{id}', [SpotController::class, 'destroy'])->middleware('auth')->name('spot.destroy');
+    Route::get('/year', [HomeController::class, 'year'])->middleware('auth')->name('year');
+    Route::get('/year/create', [YearController::class, 'create'])->middleware('auth')->name('year.create');
+    Route::get('/year/details/{id}', [YearController::class, 'details'])->middleware('auth')->name('year.details');
+    Route::patch('/year/{id}', [YearController::class, 'update'])->middleware('auth')->name('year.update');
+    Route::delete('/year/{id}', [YearController::class, 'destroy'])->middleware('auth')->name('year.destroy');
+
+ 
+
     
+ main
     Route::get('/locations/spot', [HomeController::class, 'spot'])->middleware('auth')->name('spot');
     Route::get('/locations/spot/create', [SpotController::class, 'create'])->middleware('auth')->name('spot.create');
     Route::get('/locations/spot/details/{param}', [SpotController::class, 'details'])->middleware('auth')->name('spot.details');
@@ -35,6 +51,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/locations/year/{id}', [YearController::class, 'destroy'])->middleware('auth')->name('year.destroy');
     
     Route::get('/locations/map-year/{id}', [HomeController::class, 'map_year'])->middleware('auth')->name('map_year');
+ Steven
+ Stashed changes
+
+ main
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report', [ReportsController::class, 'create'])->middleware(CheckUserRole::class . ':Pemda,User')->name('report.create');
     Route::post('/report', [ReportsController::class, 'store'])->middleware(CheckUserRole::class . ':Pemda,User')->name('report.store');
     Route::get('/viewreport', [ReportsController::class, 'viewReport'])->middleware(CheckUserRole::class . ':Pemda,User')->name('viewreport');
+    Route::get('/viewreport/viewmaps', [ReportsController::class, 'locations'])->middleware(CheckUserRole::class . ':Pemda,User')->name('viewmaps');
+
     // Route::get('/spot/create', [SpotController::class, 'create'])->middleware('auth')->name('spot.create');
     
 });

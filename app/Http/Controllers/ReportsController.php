@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 use App\Models\Reports;
 use Illuminate\View\View;
 use App\Models\Spot;
+use App\Models\Year;
+use Illuminate\Support\Facades\Auth;
 
 
 class ReportsController extends Controller
@@ -20,7 +22,6 @@ class ReportsController extends Controller
     public function viewReport()
     {
         $reports = Reports::all();
-
         return view('report.viewreport', compact('reports'));
     }
 
@@ -29,12 +30,21 @@ class ReportsController extends Controller
             'report_title' => 'required|string|max:255', 
             'category' => 'required|string|max:255', 
             'date' => 'required|date', 
-            'description' => 'required|string', 
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'description' => 'required|string',
+            'coordinates' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Get the uploaded image
         $image = $request->file('image');
+
+        // Determine fillColor based on category
+        $fillColor = '';
+        if ($request->category == 'Kerusakan') {
+            $fillColor = '#E78413'; // Orange
+        } elseif ($request->category == 'Penghijauan') {
+            $fillColor = '#11D44C'; // Yellow
+        }
     
         // Check if an image was uploaded
         if ($image) {
@@ -45,7 +55,16 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
+ Steven
+ Updated upstream
+                'location' => $request->location,
+
                 'coordinates' => $request->coordinates,
+                'fillColor' => $fillColor,
+ Stashed changes
+
+                'coordinates' => $request->coordinates,
+ main
                 'date' => $request->date,
                 'description' => $request->description,
                 'image' => $imageBinary, // Store the image as a BLOB
@@ -54,7 +73,16 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
+ Steven
+ Updated upstream
+                'location' => $request->location,
+
                 'coordinates' => $request->coordinates,
+                'fillColor' => $fillColor,
+ Stashed changes
+
+                'coordinates' => $request->coordinates,
+ main
                 'date' => $request->date,
                 'description' => $request->description,
             ]);
@@ -109,5 +137,28 @@ class ReportsController extends Controller
     $report->delete();
     return back()->with('success', 'Laporan "' . $reportTitle . '" berhasil dihapus.');
     }
+
+    public function locations() {
+        $spots = Reports::all(); // Ubah $spot menjadi $spots
+        $spotCoordinates = Reports::all()->pluck('coordinates'); // Ubah $spotCoords menjadi $spotCoordinates
+        // $years = Year::get(); // Hapus komentar jika akan digunakan nanti
+    
+        if(Auth::id()) {
+            $role = Auth()->user()->role;
+    
+            if($role == 'User' || $role == 'Pemda') { // Gabungkan kondisi Admin dan Pemda karena keduanya menggunakan halaman yang sama
+                return view('report.viewmaps', [
+                    'spots' => $spots, // Ubah 'spot' menjadi 'spots'
+                    'spotCoordinates' => json_encode($spotCoordinates),
+                    // 'years' => $years,
+                ]);
+            }
+            else {
+                return redirect()->back();
+            }
+        }
+    }
+    
+    
 
 }

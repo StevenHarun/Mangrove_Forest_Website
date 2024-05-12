@@ -93,6 +93,5 @@ class SpotController extends Controller
                 return redirect()->back();
             }
         }
-    
     }
 }

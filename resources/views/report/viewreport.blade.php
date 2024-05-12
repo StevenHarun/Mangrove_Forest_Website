@@ -1,5 +1,6 @@
 <x-app-layout>
     <style>
+        /* Styles for custom buttons */
         .custom-button {
             background-color: #F2FAE9;
             border: none;
@@ -19,6 +20,10 @@
         .kerusakan {
             color: #EC9D84;
         }
+        
+        .seemaps {
+            color: #395a5b;
+        }
 
         /* Styling for category Kerusakan */
         .category-kerusakan {
@@ -34,39 +39,39 @@
 
         /* Styling for the card */
         .card {
-            background-color: #FFFFFF; /* Warna putih */
-            border: 1px solid #E5E7EB; /* Warna border */
-            border-radius: 2.975rem; /* Sudut bulat */
-            padding: 1rem; /* Spasi dalam kartu */
-            width: 100%; /* Lebar card */
+            background-color: #FFFFFF; /* White color */
+            border: 1px solid #E5E7EB; /* Border color */
+            border-radius: 2.975rem; /* Rounded corners */
+            padding: 1rem; /* Padding inside the card */
+            width: 100%; /* Card width */
             display: flex;
-            flex-wrap: wrap; /* Mengizinkan pembungkusan flex */
-            margin-bottom: 20px; /* Margin antara setiap card */
+            flex-wrap: wrap; /* Allows flex wrapping */
+            margin-bottom: 20px; /* Margin between each card */
         }
 
         /* Styling for the layer below the card */
         .layer {
-            background-color: #F4F4F4; /* Warna abu-abu muda */
-            border-radius: 3.375rem; /* Sudut bulat */
-            padding: 1rem; /* Spasi dalam lapisan */
-            margin-top: 1rem; /* Spasi atas */
+            background-color: #F4F4F4; /* Light gray color */
+            border-radius: 3.375rem; /* Rounded corners */
+            padding: 1rem; /* Padding inside the layer */
+            margin-top: 1rem; /* Top margin */
         }
 
         /* Styling for text inside the card */
         .left-elements {
-            flex: 1; /* Menyusun elemen-elemen di sebelah kiri */
+            flex: 1; /* Arrange elements on the left */
         }
 
         .right-elements {
-            flex: 1; /* Menyusun elemen-elemen di sebelah kanan */
-            text-align: right; /* Teks di kanan */
+            flex: 1; /* Arrange elements on the right */
+            text-align: right; /* Right-align text */
         }
 
         /* Styling for the line separator */
         .line {
-            width: 100%; /* Lebar garis */
-            border-bottom: 1px solid #E5E7EB; /* Garis horizontal */
-            margin: 1rem 0; /* Jarak antara garis dan deskripsi */
+            width: 100%; /* Line width */
+            border-bottom: 1px solid #E5E7EB; /* Horizontal line */
+            margin: 1rem 0; /* Margin between line and description */
         }
     </style>
 
@@ -84,11 +89,12 @@
                     <div class="flex justify-center mt-4 ">
                         <a href="{{ route('filter', 'penghijauan') }}" class="custom-button penghijauan mr-1 font-bold">Penghijauan</a>
                         <a href="{{ route('filter', 'kerusakan') }}" class="custom-button kerusakan font-bold">Kerusakan</a>
+                        <a href="{{ route('viewmaps') }}" class="custom-button seemaps font-bold ml-1">See Report Maps</a>
                     </div>
                     
                     @if (session('success'))
                         <div class="bg-orange-100 border border-orange-400 text-red-700 px-4 py-3 rounded relative mt-3" role="alert">
-                            <strong class="font-bold">Dihapus!</strong>
+                            <strong class="font-bold">Deleted!</strong>
                             <span class="block sm:inline">{{ session('success') }}</span>
                             <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
                                 <button onclick="this.parentElement.style.display='none'" class="text-red-500 hover:text-red-700 focus:outline-none">
@@ -98,7 +104,6 @@
                         </div>
                     @endif
 
-
                     <div class="layer">    <!-- Card for each report -->
                         @foreach ($reports as $key => $report)
                         <div class="card">
@@ -107,8 +112,7 @@
                                 <div class="location ml-4 text-xl">Location: {{ $report->location }}</div>
                             </div>
                             <div class="right-elements">
-                                <div class="date text-xl font-bold mr-4">{{ Carbon\Carbon::parse($report->date)->format('d F Y') }}
-                                </div> 
+                                <div class="date text-xl font-bold mr-4">{{ Carbon\Carbon::parse($report->date)->format('d F Y') }}</div> 
                                 <div class="category font-bold mr-4 mt-1 mb-1"> 
                                     <span class="@if($report->category == 'Kerusakan') category-kerusakan @elseif($report->category == 'Penghijauan') category-penghijauan @endif">
                                         {{ $report->category }}
@@ -118,18 +122,18 @@
                                     @if ($report->image)
                                         <a href="{{ route('reports.image', $report->id) }}" class="bg-blue-500 hover:bg-blue-70 font-bold py-1 px-3 rounded-full ml-2 text-white ">View Evidence</a>
                                     @else
-                                        <p class="mr-4">No image</class>
+                                        <p class="mr-4">No image</p>
                                     @endif
                                 </div>
                                 {{-- delete button --}}
                                 <form action="{{ route('report.destroy', $report->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-full ml-2 mr">Hapus Laporan</button>
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-full ml-2 mr">Delete Report</button>
                                 </form>
                             </div>
-                            <hr class="line"> <!-- Garis separator -->
-                            <div class="description text-l mb-2 ml-4 mr-4"> Description : {{ $report->description }}</div> <!-- Deskripsi -->
+                            <hr class="line"> <!-- Line separator -->
+                            <div class="description text-l mb-2 ml-4 mr-4"> Description : {{ $report->description }}</div> <!-- Description -->
                         </div>
                         @endforeach
 
@@ -141,25 +145,25 @@
     </div>
 </x-app-layout>
 
-
+<!-- JavaScript -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var imageModal = document.getElementById('imageModal');
         var closeImage = imageModal.querySelector('.close-image');
         var imageSrc = imageModal.querySelector('#imageSrc');
 
-        // Fungsi untuk menampilkan modal image
+        // Function to display image modal
         function displayImageModal(imageUrl) {
             imageSrc.src = imageUrl;
             imageModal.classList.remove('hidden');
         }
 
-        // Fungsi untuk menyembunyikan modal image
+        // Function to hide image modal
         function hideImageModal() {
             imageModal.classList.add('hidden');
         }
 
-        // Menambahkan event listener untuk setiap link gambar
+        // Add event listener to each image link
         document.querySelectorAll('.view-image').forEach(function(link) {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -168,12 +172,12 @@
             });
         });
 
-        // Menambahkan event listener untuk tombol close
+        // Add event listener to close button
         closeImage.addEventListener('click', function() {
             hideImageModal();
         });
 
-        // Menambahkan event listener untuk klik di luar modal
+        // Add event listener to click outside modal
         window.addEventListener('click', function(event) {
             if (event.target == imageModal) {
                 hideImageModal();
