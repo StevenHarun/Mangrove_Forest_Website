@@ -25,14 +25,14 @@ class SpotController extends Controller
 
         $spot->name = request('name');
         $spot->slug = Str::slug($req->name);
-        $spot->address = request('address');
+        $spot->description = request('description');
         $spot->coordinates = request('coordinates');
         $spot->fillColor = request('fillColor');
         $spot->save();
         $spot->getYear()->sync($req->year_id);  
 
 
-        return redirect('/spot')->with('msg', 'Location has been added!');
+        return redirect('/locations/spot')->with('msg', 'Location has been added!');
     }
 
     public function update(Request $req, $id) {
@@ -40,14 +40,14 @@ class SpotController extends Controller
 
         $spot->name = request('name');
         $spot->slug = Str::slug($req->name);
-        $spot->address = request('address');
+        $spot->description = request('description');
         $spot->coordinates = request('coordinates');
         $spot->fillColor = request('fillColor');
         $spot->update();
         $spot->getYear()->sync($req->year_id);  
 
 
-        return redirect('/spot')->with('msg', 'Location has been updated!');
+        return redirect('/locations/spot')->with('msg', 'Location has been updated!');
     }
 
     public function destroy($id) {
@@ -57,7 +57,7 @@ class SpotController extends Controller
         $spot->delete();
 
  
-        return redirect('/spot')->with('msg', 'Location has been deleted!');
+        return redirect('/locations/spot')->with('msg', 'Location has been deleted!');
     }
 
     public function details($param) {

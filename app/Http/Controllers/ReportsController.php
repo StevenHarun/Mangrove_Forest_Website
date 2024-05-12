@@ -29,7 +29,6 @@ class ReportsController extends Controller
         $request->validate([ 
             'report_title' => 'required|string|max:255', 
             'category' => 'required|string|max:255', 
-            'location' => 'required|string|max:255', 
             'date' => 'required|date', 
             'description' => 'required|string',
             'coordinates' => 'required',
@@ -56,12 +55,16 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
-<<<<<<< Updated upstream
+ Steven
+ Updated upstream
                 'location' => $request->location,
-=======
+
                 'coordinates' => $request->coordinates,
                 'fillColor' => $fillColor,
->>>>>>> Stashed changes
+ Stashed changes
+
+                'coordinates' => $request->coordinates,
+ main
                 'date' => $request->date,
                 'description' => $request->description,
                 'image' => $imageBinary, // Store the image as a BLOB
@@ -70,12 +73,16 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
-<<<<<<< Updated upstream
+ Steven
+ Updated upstream
                 'location' => $request->location,
-=======
+
                 'coordinates' => $request->coordinates,
                 'fillColor' => $fillColor,
->>>>>>> Stashed changes
+ Stashed changes
+
+                'coordinates' => $request->coordinates,
+ main
                 'date' => $request->date,
                 'description' => $request->description,
             ]);

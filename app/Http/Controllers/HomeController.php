@@ -90,6 +90,17 @@ class HomeController extends Controller
         ]);
     }
 
+    public function map_year($id) {
+
+        $yearSpot = Year::where('id',$id)->first();
+        $spot = $yearSpot->getSpot()->get();
+        return view('pemda.frontend.map_year',[
+            'spot' => $spot,
+            'yearSpot' => $yearSpot,
+            // 'categories' => $this->categories
+        ]);
+    }
+
 
 }
 
