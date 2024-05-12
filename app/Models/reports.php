@@ -11,16 +11,10 @@ class reports extends Model
     protected $fillable = [
         'report_title',
         'category',
- Steven
- Updated upstream
         'location',
-
         'coordinates',
         'fillColor',
- Stashed changes
-
         'coordinates',
- main
         'date',
         'description',
         'image'

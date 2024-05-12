@@ -55,16 +55,9 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
- Steven
- Updated upstream
-                'location' => $request->location,
-
+                // 'location' => $request->location,
                 'coordinates' => $request->coordinates,
                 'fillColor' => $fillColor,
- Stashed changes
-
-                'coordinates' => $request->coordinates,
- main
                 'date' => $request->date,
                 'description' => $request->description,
                 'image' => $imageBinary, // Store the image as a BLOB
@@ -73,16 +66,9 @@ class ReportsController extends Controller
             Reports::create([
                 'report_title' => $request->report_title,
                 'category' => $request->category,
- Steven
- Updated upstream
-                'location' => $request->location,
-
+                // 'location' => $request->location,
                 'coordinates' => $request->coordinates,
                 'fillColor' => $fillColor,
- Stashed changes
-
-                'coordinates' => $request->coordinates,
- main
                 'date' => $request->date,
                 'description' => $request->description,
             ]);
