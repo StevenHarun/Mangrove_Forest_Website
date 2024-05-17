@@ -129,7 +129,6 @@
 
                 //Looping semua data dari table spot serta relasi ke tabel kategori
                 @foreach ($spots as $data)
-                    
                         L.geoJSON({!! $data->coordinates !!}, {
                                 style: {
                                     color: '{{ $data->fillColor }}',
@@ -138,7 +137,9 @@
                                 },
                             })
                             .bindPopup("<div class='my-2'><strong>Laporan:</strong> <br>{{ $data->report_title }}</div>" +
-                                "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>" 
+                                "<div class='my-2'><strong>Deskripsi Waktu:</strong> <br>{{ $data->date }}</div>" +
+                                "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>"+
+                                "<a href='/viewreport' class='btn btn-primary'>Detail</a>"
                             ).addTo(map);
                     
                 @endforeach
