@@ -19,7 +19,7 @@
                 <div class="p-2">
                     <table class="w-full">
                         <tr class="bg-[#DBEECB]">
-                            <th class="p-3">Nomor</th>
+                            <th class="p-3">No</th>
                             <th class="p-3">Year</th>
                             <th class="p-3">Action</th>
                         </tr>
