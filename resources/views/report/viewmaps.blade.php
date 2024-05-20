@@ -34,7 +34,8 @@
                 <div class="w-full h-16 p-4 flex gap-4 items-center justify-center">
                     <div class="flex justify-center items-center gap-2">
                         <div class="bg-[#11D44C] h-4 w-4"></div>
-                        <p>Penghijauann
+                        <p>Penghijauan
+                    </div>
                     <div class="flex justify-center items-center gap-2">
                         <div class="bg-[#E78413] h-4 w-4"></div>
                         <p>Kerusakan</p>
@@ -43,7 +44,6 @@
             </div>
         </div>
     </div>
-
     <!-- {{-- Load cdn js LeafletJS --}} -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -101,12 +101,17 @@
             L.control.layers(baseLayers).addTo(map);
 
             // Looping data coordinates pada tabel spot
-            var dataSearch = [
-                @foreach ($spots as $key => $value)
+            var dataKerusakan = [
+                @foreach ($kerusakan as $key => $value)
                     {!! $value->coordinates !!},
                 @endforeach
             ]
 
+            var dataPenghijauan = [
+                @foreach ($penghijauan as $key => $value)
+                    {!! $value->coordinates !!},
+                @endforeach
+            ]
             // inisiasi layerGroup dan menambahkan button search
             // Pada map
             var markersLayer = new L.LayerGroup()
@@ -122,13 +127,14 @@
             // Looping variabel dataSearch
             // Lalu hasil looping tersebut kita masukkan dalam object geoJSON
             // Dan tambahkan ke layerGroup markersLayer
-            for (i in dataSearch) {
-                var coords = dataSearch[i],
-                    marker = L.geoJSON(coords)
+            for (i in dataKerusakan) {
+                var coordsKerusakan = dataKerusakan[i],
+                    marker = L.geoJSON(coordsKerusakan)
                 markersLayer.addLayer(marker)
+                // console.log(coords);
 
                 //Looping semua data dari table spot serta relasi ke tabel kategori
-                @foreach ($spots as $data)
+                @foreach ($kerusakan as $data)
                         L.geoJSON({!! $data->coordinates !!}, {
                                 style: {
                                     color: '{{ $data->fillColor }}',
@@ -141,8 +147,40 @@
                                 "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>"+
                                 "<a href='/viewreport' class='btn btn-primary'>Detail</a>"
                             ).addTo(map);
+                @endforeach
+            }
+
+            var penghijauanDataArray = [];
+
+            for (i in dataPenghijauan) {
+                var coordsPenghijauan = dataPenghijauan[i],
+                    marker = L.geoJSON(coordsPenghijauan)
+                markersLayer.addLayer(marker)
+                // console.log(coordsPenghijauan);
+
+                //Looping semua data dari table spot serta relasi ke tabel kategori
+                @foreach ($penghijauan as $data)
+                        var dataPenghijauanArray = L.geoJSON({!! $data->coordinates !!}, {
+                                                        style: {
+                                                            color: '{{ $data->fillColor }}',
+                                                            fillColor: '{{ $data->fillColor }}',
+                                                            fillOpacity: 0.15,
+                                                        },
+                                                    })
+                                                    .bindPopup("<div class='my-2'><strong>Laporan:</strong> <br>{{ $data->report_title }}</div>" +
+                                                        "<div class='my-2'><strong>Deskripsi Waktu:</strong> <br>{{ $data->date }}</div>" +
+                                                        "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>"+
+                                                        "<a href='/viewreport' class='btn btn-primary'>Detail</a>"
+                                                    ).addTo(map);
+                        // var dataPenghijauanLayer = L.LayerGroup([dataPenghijauanArray]);
+                        // console.log(dataPenghijauanLayer);
                     
                 @endforeach
             }
+
+            // var overlayMaps = {
+            //     "Penghijauan": dataPenghijauanLayer
+            // };
+            // var layerControl = L.control.layers(baseLayers, overlayMaps).addTo(map);
     </script>
 </x-app-layout>

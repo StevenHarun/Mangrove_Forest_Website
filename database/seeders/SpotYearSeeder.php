@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Year;
+use App\Models\SpotYear;
 
-class YearSeeder extends Seeder
+class SpotYearSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class YearSeeder extends Seeder
     public function run(): void
     {
         for ($i = 1; $i <= 5; $i++) {
-            year::create([
-                'year' => '202' . $i,
-                'slug' => '202' . $i,
+            SpotYear::create([
+                'year_id' => $i,
+                'spot_id' => $i,
             ]);
         }
     }

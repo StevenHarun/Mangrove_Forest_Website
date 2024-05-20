@@ -106,7 +106,7 @@
             var map = L.map('map', {
                 center: [-0.18353765071211733, 116.30192451474325],
                 zoom: 5,
-                layers: [streets],
+                layers: [satellite],
                 fullscreenControl: {
                     pseudoFullscreen: false
                 }
