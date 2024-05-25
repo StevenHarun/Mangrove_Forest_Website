@@ -118,7 +118,7 @@
                         <div class="card">
                             <div class="left-elements">
                                 <div class="report-title font-bold text-3xl ml-4 mt-1">{{ $report->report_title }}</div>
-                                <div class="location ml-4 text-xl">Location: {{ $report->location }}</div>
+                                {{-- <div class="location ml-4 text-xl">Location: {{ $report->location }}</div> --}}
                             </div>
                             <div class="right-elements">
                                 <div class="date text-xl font-bold mr-4">{{ Carbon\Carbon::parse($report->date)->format('d F Y') }}</div> 
@@ -135,11 +135,11 @@
                                     @endif
                                 </div>
                                 {{-- delete button --}}
-                                <form action="{{ route('report.destroy', $report->id) }}" method="POST" class="inline">
+                                <form action="{{ route('report.destroy', $report->id) }}" method="POST" class="inline" onsubmit="return confirmDeletion('{{ $report->report_title }}')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-full ml-2 mr">Delete Report</button>
-                                </form>
+                                </form>                                
 
                                 {{-- <div class="view font-bold mb-1 mt-1"> 
                                     <a href="{{ route('viewdetail', $report->id) }}" class="custom-button seemaps">View Detail</a>
@@ -160,8 +160,8 @@
 
 <!-- JavaScript -->
 <script>
-    function confirmDeletion(reportTitle) {
-            return confirm(`Apakah Anda benar-benar ingin menghapus laporan "${reportTitle}"?`);
+    function confirmDeletion(report_title) {
+            return confirm(`Apakah Anda benar-benar ingin menghapus laporan "${report_title}"?`);
         }
         
     document.addEventListener('DOMContentLoaded', function() {
