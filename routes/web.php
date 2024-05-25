@@ -64,6 +64,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/report', [ReportsController::class, 'store'])->middleware(CheckUserRole::class . ':Pemda,User')->name('report.store');
     Route::get('/viewreport', [ReportsController::class, 'viewReport'])->middleware(CheckUserRole::class . ':Pemda,User')->name('viewreport');
     Route::get('/viewreport/viewmaps', [ReportsController::class, 'locations'])->middleware(CheckUserRole::class . ':Pemda,User')->name('viewmaps');
+    Route::get('/viewreport/viewdetail/{id}', [ReportsController::class, 'show'])->name('viewdetail');
+
 
     // Route::get('/spot/create', [SpotController::class, 'create'])->middleware('auth')->name('spot.create');
     
@@ -74,7 +76,8 @@ Route::post('/spot/create', [SpotController::class, 'store'])->name('spot.store'
 Route::post('/year/create', [YearController::class, 'store'])->name('year.store');
 
 Route::get('/reports/{reportId}/image', [ReportsController::class, 'retrieveImage'])->name('reports.image');
-Route::delete('/report/{id}', [ReportsController::class, 'destroy'])->middleware('auth')->name('report.destroy');
+Route::delete('/viewreport/viewdetail/{id}', [ReportsController::class, 'destroy'])->middleware('auth')->name('report.destroy');
+Route::get('/viewreport/viewdetail/{id}', [ReportsController::class, 'show'])->name('viewdetail');
 
 // Route::middleware(['auth', 'role:user,pemda'])->group(function () {
 //     Route::get('/report', [ReportsController::class, 'create'])->name('report.create');

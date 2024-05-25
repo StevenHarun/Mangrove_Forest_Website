@@ -20,7 +20,7 @@
         .kerusakan {
             color: #EC9D84;
         }
-
+        
         .seemaps {
             color: #395a5b;
         }
@@ -73,6 +73,15 @@
             border-bottom: 1px solid #E5E7EB; /* Horizontal line */
             margin: 1rem 0; /* Margin between line and description */
         }
+        .seemaps {
+            color: #395a5b;
+        }
+        .report-image {
+            max-width: 100%; /* Ensure image fits within the card */
+            border-radius: 1rem; /* Rounded corners */
+            margin: 1rem 0; /* Margin around the image */
+        }
+
     </style>
 
     <!-- Content -->
@@ -89,6 +98,7 @@
                     <div class="flex justify-center mt-4 ">
                         <a href="{{ route('filter', 'penghijauan') }}" class="custom-button penghijauan mr-1 font-bold">Penghijauan</a>
                         <a href="{{ route('filter', 'kerusakan') }}" class="custom-button kerusakan font-bold">Kerusakan</a>
+                        <a href="{{ route('viewmaps') }}" class="custom-button seemaps font-bold ml-1">See Report Maps</a>
                     </div>
                     
                     @if (session('success'))
@@ -101,14 +111,14 @@
                                 </button>
                             </span>
                         </div>
-                    @endif
+                    @endif  
 
-                    <div class="layer">    
-                        <!-- Card for each report -->
-                        @foreach ($reports as $key => $report)
+                    <div class="layer">    <!-- Card for each report -->
+                        {{-- @foreach ($reports as $key => $report) --}}
                         <div class="card">
                             <div class="left-elements">
                                 <div class="report-title font-bold text-3xl ml-4 mt-1">{{ $report->report_title }}</div>
+                                <div class="location ml-4 text-xl">Location: {{ $report->location }}</div>
                             </div>
                             <div class="right-elements">
                                 <div class="date text-xl font-bold mr-4">{{ Carbon\Carbon::parse($report->date)->format('d F Y') }}</div> 
@@ -118,16 +128,29 @@
                                     </span>
                                 </div>
                                 <div class="view font-bold mb-1 mt-1"> 
-                                    <a href="{{ route('viewdetail', $report->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ml-2 mr">View Detail</a>
+                                    @if ($report->image)
+                                        <a href="{{ route('reports.image', $report->id) }}" class="bg-blue-500 hover:bg-blue-70 font-bold py-1 px-3 rounded-full ml-2 text-white ">View Evidence</a>
+                                    @else
+                                        <p class="mr-4">No image</p>
+                                    @endif
                                 </div>
-                            </div>
-                        </div>
-                        @endforeach
+                                {{-- delete button --}}
+                                <form action="{{ route('report.destroy', $report->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-full ml-2 mr">Delete Report</button>
+                                </form>
 
-                        <!-- Pagination Links -->
-                        <div class="mt-4">
-                            {{ $reports->links() }}
+                                {{-- <div class="view font-bold mb-1 mt-1"> 
+                                    <a href="{{ route('viewdetail', $report->id) }}" class="custom-button seemaps">View Detail</a>
+                                </div> --}}
+                            </div>
+                            <hr class="line"> <!-- Line separator -->
+                            <div class="description text-l mb-2 ml-4 mr-4"> Description : {{ $report->description }}</div> <!-- Description -->
                         </div>
+                        {{-- @endforeach --}}
+
+                    <!-- Layer below the card -->
                     </div>
                 </div>
             </div>
@@ -135,9 +158,12 @@
     </div>
 </x-app-layout>
 
-
 <!-- JavaScript -->
 <script>
+    function confirmDeletion(reportTitle) {
+            return confirm(`Apakah Anda benar-benar ingin menghapus laporan "${reportTitle}"?`);
+        }
+        
     document.addEventListener('DOMContentLoaded', function() {
         var imageModal = document.getElementById('imageModal');
         var closeImage = imageModal.querySelector('.close-image');
