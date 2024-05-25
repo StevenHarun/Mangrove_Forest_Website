@@ -29,6 +29,7 @@
         .category-kerusakan {
             background-color: #FEE2B2;
             border-color: #F59E0B;
+
         }
 
         /* Styling for category Penghijauan */
@@ -96,8 +97,8 @@
 
                     <!-- Filter Buttons -->
                     <div class="flex justify-center mt-4 ">
-                        <a href="{{ route('filter', 'penghijauan') }}" class="custom-button penghijauan mr-1 font-bold">Penghijauan</a>
-                        <a href="{{ route('filter', 'kerusakan') }}" class="custom-button kerusakan font-bold">Kerusakan</a>
+                        {{-- <a href="{{ route('filter', 'penghijauan') }}" class="custom-button penghijauan mr-1 font-bold">Penghijauan</a> --}}
+                        {{-- <a href="{{ route('filter', 'kerusakan') }}" class="custom-button kerusakan font-bold">Kerusakan</a> --}}
                         <a href="{{ route('viewmaps') }}" class="custom-button seemaps font-bold ml-1">See Report Maps</a>
                     </div>
                     
@@ -118,15 +119,16 @@
                         <div class="card">
                             <div class="left-elements">
                                 <div class="report-title font-bold text-3xl ml-4 mt-1">{{ $report->report_title }}</div>
-                                {{-- <div class="location ml-4 text-xl">Location: {{ $report->location }}</div> --}}
-                            </div>
-                            <div class="right-elements">
-                                <div class="date text-xl font-bold mr-4">{{ Carbon\Carbon::parse($report->date)->format('d F Y') }}</div> 
-                                <div class="category font-bold mr-4 mt-1 mb-1"> 
+                                <div class="category font-bold mt-1 ml-4"> 
                                     <span class="@if($report->category == 'Kerusakan') category-kerusakan @elseif($report->category == 'Penghijauan') category-penghijauan @endif">
                                         {{ $report->category }}
                                     </span>
                                 </div>
+                                {{-- <div class="location ml-4 text-xl">Location: {{ $report->location }}</div> --}}
+                            </div>
+                            <div class="right-elements">
+                                <div class="date text-xl font-bold mr-4">{{ Carbon\Carbon::parse($report->date)->format('d F Y') }}</div> 
+                                
                                 <div class="view font-bold mb-1 mt-1"> 
                                     @if ($report->image)
                                         <a href="{{ route('reports.image', $report->id) }}" class="bg-blue-500 hover:bg-blue-70 font-bold py-1 px-3 rounded-full ml-2 text-white ">View Evidence</a>
@@ -147,7 +149,7 @@
                             </div>
                             <hr class="line"> <!-- Line separator -->
                             <div class="description text-l mb-2 ml-4 mr-4"> Description : {{ $report->description }}</div> <!-- Description -->
-                        </div>
+                        </div>  
                         {{-- @endforeach --}}
 
                     <!-- Layer below the card -->

@@ -21,7 +21,7 @@ class ReportsController extends Controller
 
     public function viewReport()
     {
-        // Mengambil 10 laporan per halaman
+        // Mengambil 8 laporan per halaman
         $reports = Reports::paginate(8);
         return view('report.viewreport', compact('reports'));
     }
