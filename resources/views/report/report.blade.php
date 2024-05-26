@@ -12,8 +12,8 @@
                     <!-- Table -->
                     <div class="bg-white rounded-lg shadow-lg px-4 py-1 mb-2 mr-2">
                         
-                        <!-- Title 'USER DETAILS' -->
-                        <h2 class="text-center text-3xl mb-3 text-gray-700">CREATE DAMAGE REPORT</h2> 
+                        {{-- <!-- Title 'USER DETAILS' -->
+                        <h2 class="text-center text-3xl mb-3 text-gray-700">CREATE DAMAGE REPORT</h2>  --}}
                         
                         {{-- Notification Alert --}}
                             @if(session('successes'))
