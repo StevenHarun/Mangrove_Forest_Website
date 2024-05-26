@@ -181,19 +181,19 @@ class HomeController extends Controller
                     ]);
 
                     // Creating kerusakan chart
-                    $chartKerusakan = app()
-                        ->chartjs->name("KerusakanChart")
-                        ->type("bar")
-                        ->size(["width" => 400, "height" => 200])
-                        ->labels($labels)
-                        ->datasets([
-                            [
-                                "label" => "Kerusakan",
-                                "backgroundColor" => "rgba(255, 99, 132, 0.2)",
-                                "borderColor" => "rgba(255, 99, 132, 1)",
-                                "data" => $dataKerusakan
-                            ]
-                        ])
+                        $chartKerusakan = app()
+                            ->chartjs->name("KerusakanChart")
+                            ->type("bar")
+                            ->size(["width" => 400, "height" => 200])
+                            ->labels($labels)
+                            ->datasets([
+                                [
+                                    "label" => "Kerusakan",
+                                    "backgroundColor" => "rgba(255, 99, 132, 0.2)",
+                                    "borderColor" => "rgba(255, 99, 132, 1)",
+                                    "data" => $dataKerusakan
+                                ]
+                            ])
                         ->options([
                             'scales' => [
                                 'x' => [

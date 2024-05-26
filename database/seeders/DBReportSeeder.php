@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
-class ReportSeeder extends Seeder
+class DBReportSeeder extends Seeder
 {
     /**
      * Run the database seeds.
