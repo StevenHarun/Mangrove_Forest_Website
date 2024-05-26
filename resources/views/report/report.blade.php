@@ -34,14 +34,14 @@
                             @csrf
                             <!-- Name -->
                             <div class="mt-4 grid grid-cols-2">
-                                <label for="report_title" class="text-gray-700">Report Title</label>
+                                <label for="report_title" class="text-gray-14000">Report Title</label>
                                 <x-text-input id="report_title" class="block mt-1 w-full" type="text" name="report_title" :value="old('report_title')" required autofocus autocomplete="report_title" />
                                 <x-input-error :messages="$errors->get('report_title')" class="mt-2" />
                             </div>
 
                             <!-- Category -->
                             <div class="mt-4 grid grid-cols-2">
-                                <label for="category" class="text-gray-700">Category</label>
+                                <label for="category" class="text-gray-14000">Category</label>
                                 <div class="relative">
                                     <select id="category" name="category" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow-sm focus:outline-none focus:border-indigo-500">
                                         <option value="Kerusakan">Kerusakan</option>
