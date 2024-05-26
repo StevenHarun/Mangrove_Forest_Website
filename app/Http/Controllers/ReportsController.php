@@ -131,7 +131,9 @@ class ReportsController extends Controller
     }   
 
     public function locations() {
-        $spots = Reports::all(); // Ubah $spot menjadi $spots
+        $kerusakanReports = Reports::where('category', 'Kerusakan')->get();
+        $penghijauanReports = Reports::where('category', 'Penghijauan')->get();
+        // $spots = Reports::all(); // Ubah $spot menjadi $spots
         $spotCoordinates = Reports::all()->pluck('coordinates'); // Ubah $spotCoords menjadi $spotCoordinates
         // $years = Year::get(); // Hapus komentar jika akan digunakan nanti
     
@@ -140,7 +142,8 @@ class ReportsController extends Controller
     
             if($role == 'User' || $role == 'Pemda') { // Gabungkan kondisi Admin dan Pemda karena keduanya menggunakan halaman yang sama
                 return view('report.viewmaps', [
-                    'spots' => $spots, // Ubah 'spot' menjadi 'spots'
+                    'kerusakan' => $kerusakanReports,
+                    'penghijauan' => $penghijauanReports,
                     'spotCoordinates' => json_encode($spotCoordinates),
                     // 'years' => $years,
                 ]);

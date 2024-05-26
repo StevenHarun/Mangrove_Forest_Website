@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <div class="py-6" />
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -24,11 +19,11 @@
                 <!-- Title 'Locations DETAILS' -->
                 <h2 class="text-center text-3xl mb-3 text-gray-700">YEAR DETAILS</h2>
 
-                <!-- Form Registrasi -->
+                <!-- Form Add yeat -->
                 <form method="POST" action="{{ route('year.store') }}">
                     @csrf
 
-                    <!-- Tahun -->
+                    <!-- Year -->
                     <div class="mt-4 grid grid-cols-2">
                         <label for="year" class="text-gray-700">Year</label>
                         <x-text-input id="year" class="block mt-1 w-full" type="text" name="year" required autofocus autocomplete="2017" />

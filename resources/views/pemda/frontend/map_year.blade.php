@@ -1,9 +1,4 @@
 <x-app-layout>  
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -46,7 +41,7 @@
             mbUrl =
             'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpcHJhdGFtYSIsImEiOiJjbDY5OGJkajkwcHliM2xwMzdwYzZ0MjNqIn0.yRMI7Q02u6qldbDGRypgQQ';
 
-        // Inisiasi dan Setup tipe map yang akan dimuat pada baseLayers
+        // Setup map
         var satellite = L.tileLayer(mbUrl, {
                 id: 'mapbox/satellite-v9',
                 tileSize: 512,
@@ -67,18 +62,16 @@
             });
 
 
-            // Inisiasi map titik koordinat, zoom, layers, dan button fullscreen map
             var map = L.map('map', {
                 center: [-0.18353765071211733, 116.30192451474325],
                 zoom: 5,
-                layers: [streets],
+                layers: [satellite],
                 fullscreenControl: {
                     pseudoFullscreen: false
                 }
             });
 
-            // Inisiasi baseLayers
-            // Lalu tambahkan ke dalam layer control
+            // Initiation baselayer
             var baseLayers = {
                 "Streets": streets,
                 "Satellite": satellite,
@@ -94,8 +87,7 @@
                 @endforeach
             ]
 
-            // inisiasi layerGroup dan menambahkan button search
-            // Pada map
+            // Initiation layergroup and adding search feature
             var markersLayer = new L.LayerGroup()
             map.addLayer(markersLayer)
             var searchControl = new L.Control.Search({
@@ -105,16 +97,13 @@
             })
             map.addControl(searchControl);
 
-
-            // Looping variabel dataSearch
-            // Lalu hasil looping tersebut kita masukkan dalam object geoJSON
-            // Dam tambahkan ke layerGroup markersLayer
+            // Looping variable dataSearch then push to geoJSON object
             for (i in dataSearch) {
                 var coords = dataSearch,
                     marker = L.geoJSON(coords)
                 markersLayer.addLayer(marker)
 
-                //Looping semua data dari table spot serta relasi ke tabel kategori
+                //Looping data spot table and add to map
                 @foreach ($spot as $data)
                     @foreach ($data->getYear as $itemYear)
                         L.geoJSON({!! $data->coordinates !!}, {

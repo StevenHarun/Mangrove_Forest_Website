@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text   -gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <div class="py-6"/>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -21,7 +16,7 @@
                     <!-- Title 'Locations DETAILS' -->
                     <h2 class="text-center text-3xl mb-3 text-gray-700">LOCATIONS DETAILS</h2>
 
-                    <!-- Form Registrasi -->
+                    <!-- Form Add map -->
                     <form method="POST" action="{{ route('spot.store') }}">
                         @csrf
 
