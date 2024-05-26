@@ -17,7 +17,7 @@
                 <a href="{{ url()->previous() }}" class="underline" >Back</a> --}}
 
                 <!-- Title 'Locations DETAILS' -->
-                <h2 class="text-center text-3xl mb-3 text-gray-700">YEAR DETAILS</h2>
+                <h2 class="text-center text-3xl mb-3 text-gray-700">YEAR DTEAILS</h2>
 
                 <!-- Form Add yeat -->
                 <form method="POST" action="{{ route('year.store') }}">
