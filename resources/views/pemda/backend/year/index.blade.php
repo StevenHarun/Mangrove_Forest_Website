@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between p-2 items-center">
-                    <h1 class="text-lg font-bold">Years Dtaa</h1>
+                    <h1 class="text-lg font-bold">Years Data</h1>
                     <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
                         <x-link :href="route('year.create')">
                             {{ __('Create Data') }}
