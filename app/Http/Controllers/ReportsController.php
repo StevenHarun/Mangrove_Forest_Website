@@ -21,7 +21,16 @@ class ReportsController extends Controller
 
     public function viewReport()
     {
-        $reports = Reports::all();
+        // Mengambil 8 laporan per halaman
+        $reports = Reports::paginate(8);
+        return view('report.viewreport', compact('reports'));
+    }
+
+    // Tambahkan method filter untuk mengatur filter
+    public function filter($category)
+    {
+        // Mengambil 10 laporan per halaman berdasarkan kategori
+        $reports = Reports::where('category', $category)->paginate(8);
         return view('report.viewreport', compact('reports'));
     }
 
@@ -91,6 +100,12 @@ class ReportsController extends Controller
         return redirect('/report')->with('msg', 'Location has been added!');
     }
 
+    public function show($id)
+    {
+        $report = Reports::findOrFail($id);
+        return view('report.viewdetail', compact('report'));
+    }
+
 
     public function retrieveImage($reportId)
     {
@@ -106,23 +121,14 @@ class ReportsController extends Controller
             ->header('Content-Type', 'image/jpeg'); // Adjust content type if necessary
     }
 
-    // Tambahkan method filter untuk mengatur filter
-    public function filter($category)
-    {
-        // Lakukan query berdasarkan kategori yang dipilih
-        $reports = Reports::where('category', $category)->get();
-
-        // Kirim data ke view
-        return view('report.viewreport', compact('reports'));
-    }
-
     public function destroy($id)
     {
-    $report = Reports::findOrFail($id);
-    $reportTitle = $report->report_title;
-    $report->delete();
-    return back()->with('success', 'Laporan "' . $reportTitle . '" berhasil dihapus.');
-    }
+        $report = Reports::findOrFail($id);
+        $reportTitle = $report->report_title;
+        $report->delete();
+
+        return redirect('/viewreport')->with('success', 'Laporan "' . $reportTitle . '" berhasil dihapus.');
+    }   
 
     public function locations() {
         $kerusakanReports = Reports::where('category', 'Kerusakan')->get();
@@ -147,7 +153,4 @@ class ReportsController extends Controller
             }
         }
     }
-    
-    
-
 }
