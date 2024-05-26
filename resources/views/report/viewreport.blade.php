@@ -73,6 +73,31 @@
             border-bottom: 1px solid #E5E7EB; /* Horizontal line */
             margin: 1rem 0; /* Margin between line and description */
         }
+
+        .pagination a {
+            background-color: #FFFFFF; /* White background */
+            border: 1px solid #E5E7EB; /* Border color */
+            color: #1F2937; /* Text color (gray-800) */
+            padding: 0.5rem 0.75rem; /* Padding */
+            margin: 0.25rem; /* Margin between links */
+            border-radius: 0.375rem; /* Rounded corners */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .pagination a:hover {
+            background-color: #F3F4F6; /* Background color on hover (gray-200) */
+        }
+
+        .pagination .active a {
+            background-color: #4F46E5; /* Active page background color (indigo-600) */
+            color: #FFFFFF; /* Active page text color */
+        }
+
+        .pagination .disabled a {
+            background-color: #E5E7EB; /* Disabled background color (gray-300) */
+            color: #9CA3AF; /* Disabled text color (gray-400) */
+            cursor: not-allowed; /* Not-allowed cursor for disabled links */
+        }
     </style>
 
     <!-- Content -->
@@ -125,7 +150,7 @@
                         @endforeach
 
                         <!-- Pagination Links -->
-                        <div class="mt-4">
+                        <div class="mt-4 pagination">
                             {{ $reports->links() }}
                         </div>
                     </div>
