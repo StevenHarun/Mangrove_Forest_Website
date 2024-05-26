@@ -22,8 +22,8 @@
                     <table class="w-full">
                         <tr class="bg-[#DBEECB]">
                             <th class="p-3">ID</th>
-                            <th class="p-3">Year</th>
-                            <th class="p-3">Action</th>
+                            <th class="p-3">YEAR</th>
+                            <th class="p-3">ACTION</th>
                         </tr>
                         @foreach($years as $year)
                         
