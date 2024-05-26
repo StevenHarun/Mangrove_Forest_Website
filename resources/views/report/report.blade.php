@@ -1,5 +1,11 @@
 <x-app-layout>
     
+    <style>
+        .custom-font-size {
+            font-size: 20px; /* Contoh ukuran font, sesuaikan dengan kebutuhan Anda */
+        }
+    </style>
+    
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -34,14 +40,14 @@
                             @csrf
                             <!-- Name -->
                             <div class="mt-4 grid grid-cols-2">
-                                <label for="report_title" class="text-gray-14000">Report Title</label>
+                                <label for="report_title" class="text-gray-700 custom-font-size">Report Title</label>
                                 <x-text-input id="report_title" class="block mt-1 w-full" type="text" name="report_title" :value="old('report_title')" required autofocus autocomplete="report_title" />
                                 <x-input-error :messages="$errors->get('report_title')" class="mt-2" />
                             </div>
 
                             <!-- Category -->
                             <div class="mt-4 grid grid-cols-2">
-                                <label for="category" class="text-gray-14000">Category</label>
+                                <label for="category" class="text-gray-700 custom-font-size">Category</label>
                                 <div class="relative">
                                     <select id="category" name="category" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow-sm focus:outline-none focus:border-indigo-500">
                                         <option value="Kerusakan">Kerusakan</option>
@@ -56,36 +62,35 @@
                                 <x-input-error :messages="$errors->get('category')" class="mt-2" />
                             </div>
 
-                            <!-- locations -->
                             <div class="mt-4 grid grid-cols-2">
-                                <div>Location</div>
+                                <div class="custom-font-size">Location</div>
                                 <div id="map" style="height: 400px;"></div>
                             </div>
-
-                                <!-- Coordinates -->
+                            
                             <div class="mt-4 grid grid-cols-2">
-                                <label for="coordinates" class="text-gray-700">Coordinates</label>
+                                <label for="coordinates" class="text-gray-700 custom-font-size">Coordinates</label>
                                 <textarea name="coordinates" id="coordinates" cols="30" rows="10" readonly></textarea>
                                 <x-input-error :messages="$errors->get('coordinates')" class="mt-2" />
                             </div>
                             
+                            
                             {{-- Date --}}
                             <div class="mt-4 grid grid-cols-2">
-                                <label for="date" class="text-gray-700">Date</label>
+                                <label for="date" class="text-gray-700 custom-font-size">Date</label>
                                 <x-text-input id="date" class="block mt-1 w-full" type="date" name="date" required />
                                 <x-input-error :messages="$errors->get('date')" class="mt-2" />
                             </div>
                                                       
                             {{-- Image --}}
                             <div class="mt-4 grid grid-cols-2">
-                                <label for="image" class="text-gray-700">Upload Image</label>
+                                <label for="image" class="text-gray-700 custom-font-size">Upload Image</label>
                                 <input id="image" name="image" type="file" class="block mt-1 w-full" accept="image/*">
                                 <!-- Add any additional validation error handling here -->
                             </div>
 
                             <!-- Deskripsi -->
                             <div class="mt-4">
-                                <label for="description" class="text-gray-700">Description</label>
+                                <label for="description" class="text-gray-700 custom-font-size">Description</label>
                                 <textarea id="description" name="description" rows="4" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
                             </div>
