@@ -13,11 +13,12 @@ class YearSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 5; $i++) {
-            year::create([
-                'year' => '202' . $i,
-                'slug' => '202' . $i,
-            ]);
-        }
+        // for ($i = 1; $i <= 5; $i++) {
+        //     year::create([
+        //         'year' => '202' . $i,
+        //         'slug' => '202' . $i,
+        //     ]);
+        // }
+        Year::factory()->count(5)->create();
     }
 }

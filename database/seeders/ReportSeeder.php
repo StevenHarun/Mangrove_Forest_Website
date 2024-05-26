@@ -16,16 +16,9 @@ class ReportSeeder extends Seeder
      */
     public function run(): void
     {
-        // reports::create([
-        //     'report_title' => 'Kebakaran hutan',
-        //     'category' => 'Kerusakan',
-        //     'coordinates' => '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"report_title":"Kebakaran hutan"},"geometry":{"type":"Point","coordinates":[110.738277,-7.85032]}}]}',
-        //     'fillColor' => '#E78413',
-        //     'date' => '2024-05-13',
-        //     'description' => 'Kebarakan karena membakar hutan' 
-        // ]);
-
+        // start date (1-1-2024)
         $startDate = Carbon::create(2024, 1, 1);
+        // looping 50 dummy data
         for ($i = 1; $i <= 50; $i++) {
             reports::create([
                 'report_title' => 'Kerusakan ' . $i,
@@ -49,8 +42,10 @@ class ReportSeeder extends Seeder
             ]);
         }
 
+        // start date (1-1-2024)
         $startDate = Carbon::create(2024, 1, 1);
         for ($i = 1; $i <= 50; $i++) {
+        // looping 50 dummy data
             reports::create([
                 'report_title' => 'Penghijauan ' . $i,
                 'category' => 'Penghijauan',

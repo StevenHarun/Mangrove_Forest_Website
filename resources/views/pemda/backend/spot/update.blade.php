@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <div class="py-6"/>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -127,7 +122,7 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Menampilkan titik koordinat dari data geojson yang ada di tabel spot
+        // return coordinates from geoJSON in sopt table 
         var drawnItems = L.geoJson({!! $spot->coordinates !!}).addTo(map)
 
         map.addLayer(drawnItems);
