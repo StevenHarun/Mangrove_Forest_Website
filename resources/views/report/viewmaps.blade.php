@@ -1,12 +1,12 @@
 <x-app-layout>  
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-screen-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-sm sm:rounded-lg">
                 <div class="flex justify-between p-2">
                     <div class="z-20">
-                        <div class="sm:flex sm:items-center">
-                            <x-dropdown>
+                        <div class="sm:flex sm:items-center sm:ms-6">
+                            {{-- <x-dropdown>
                                 <x-slot name="trigger">
                                     <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
                                         <div>{{ __('Filter tahun') }}</div>
@@ -26,36 +26,19 @@
                                     </x-dropdown-link>
                                     @endforeach
                                 </x-slot>
-                            </x-dropdown>
+                            </x-dropdown> --}}
                         </div>
-                        
-                    </div>
-                    <div class="">
-                        <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
-                            <x-link :href="route('year')">
-                                {{ __('Manage Year') }}
-                            </x-link> 
-                        </button>
-                        <button class="inline-flex items-center px-4 py-2 text-white bg-[#75B896] border border-transparent rounded-md hover:border-[#75B896] hover:bg-white hover:text-[#75B896] transition ease-in-out duration-150">
-                            <x-link :href="route('spot')">
-                                {{ __('Manage Spot') }}
-                            </x-link> 
-                        </button>
                     </div>
                 </div>
                 <div id="map" style="height: 500px;" class="z-10"></div>
-                <div class="w-full h-16 p-4 flex gap-4 items-center">
+                <div class="w-full h-16 p-4 flex gap-4 items-center justify-center">
                     <div class="flex justify-center items-center gap-2">
-                        <div class="bg-[#65B741] h-4 w-4"></div>
-                        <p>High fertility</p>
+                        <div class="bg-[#11D44C] h-4 w-4"></div>
+                        <p>Penghijauan
                     </div>
                     <div class="flex justify-center items-center gap-2">
-                        <div class="bg-[#FFFEC4] h-4 w-4"></div>
-                        <p>Medium fertility</p>
-                    </div>
-                    <div class="flex justify-center items-center gap-2">
-                        <div class="bg-[#FFCF81] h-4 w-4"></div>
-                        <p>Low fertility</p>
+                        <div class="bg-[#E78413] h-4 w-4"></div>
+                        <p>Kerusakan</p>
                     </div>
                 </div>
             </div>
@@ -76,10 +59,10 @@
             mbUrl =
             'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXJpcHJhdGFtYSIsImEiOiJjbDY5OGJkajkwcHliM2xwMzdwYzZ0MjNqIn0.yRMI7Q02u6qldbDGRypgQQ';
 
-        // Setup map
+        // Inisiasi dan Setup tipe map yang akan dimuat pada baseLayers
         var satellite = L.tileLayer(mbUrl, {
                 id: 'mapbox/satellite-v9',
-                tileSize: 512,
+                tileSize: 512   ,
                 zoomOffset: -1,
                 attribution: mbAttr
             }),
@@ -97,6 +80,7 @@
             });
 
 
+            // Inisiasi map titik koordinat, zoom, layers, dan button fullscreen map
             var map = L.map('map', {
                 center: [-0.18353765071211733, 116.30192451474325],
                 zoom: 5,
@@ -106,7 +90,8 @@
                 }
             });
 
-            // Initiation baselayer
+            // Inisiasi baseLayers
+            // Lalu tambahkan ke dalam layer control
             var baseLayers = {
                 "Streets": streets,
                 "Satellite": satellite,
@@ -115,14 +100,20 @@
 
             L.control.layers(baseLayers).addTo(map);
 
-            // Looping data coordinates spot table
-            var dataSearch = [
-                @foreach ($spot as $key => $value)
+            // Looping data coordinates pada tabel spot
+            var dataKerusakan = [
+                @foreach ($kerusakan as $key => $value)
                     {!! $value->coordinates !!},
                 @endforeach
             ]
 
-            // Initiation layergroup and adding search feature
+            var dataPenghijauan = [
+                @foreach ($penghijauan as $key => $value)
+                    {!! $value->coordinates !!},
+                @endforeach
+            ]
+            // inisiasi layerGroup dan menambahkan button search
+            // Pada map
             var markersLayer = new L.LayerGroup()
             map.addLayer(markersLayer)
             var searchControl = new L.Control.Search({
@@ -133,30 +124,63 @@
             map.addControl(searchControl);
 
 
-            // Looping variable dataSearch then push to geoJSON object
-            for (i in dataSearch) {
-                var coords = dataSearch,
-                    marker = L.geoJSON(coords)
+            // Looping variabel dataSearch
+            // Lalu hasil looping tersebut kita masukkan dalam object geoJSON
+            // Dan tambahkan ke layerGroup markersLayer
+            for (i in dataKerusakan) {
+                var coordsKerusakan = dataKerusakan[i],
+                    marker = L.geoJSON(coordsKerusakan)
                 markersLayer.addLayer(marker)
+                // console.log(coords);
 
-                //Looping data spot table and add to map
-                @foreach ($spot as $data)
-                    @foreach ($data->getYear as $itemYear)
+                //Looping semua data dari table spot serta relasi ke tabel kategori
+                @foreach ($kerusakan as $data)
                         L.geoJSON({!! $data->coordinates !!}, {
                                 style: {
                                     color: '{{ $data->fillColor }}',
                                     fillColor: '{{ $data->fillColor }}',
-                                    fillOpacity: 0.8,
+                                    fillOpacity: 0.15,
                                 },
                             })
-                            .bindPopup("<div class='my-2'><strong>Nama Lokasi:</strong> <br>{{ $data->name }}</div>" +
-                                "<div class='my-2'><strong>Tahun:</strong> <br>{{ $itemYear->year }}</div>" +
-                                "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>" 
+                            .bindPopup("<div class='my-2'><strong>Laporan:</strong> <br>{{ $data->report_title }}</div>" +
+                                "<div class='my-2'><strong>Deskripsi Waktu:</strong> <br>{{ $data->date }}</div>" +
+                                "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>"+
+                                "<a href='/viewreport' class='btn btn-primary'>Detail</a>"
                             ).addTo(map);
-                    @endforeach
                 @endforeach
             }
+
+            var penghijauanDataArray = [];
+
+            for (i in dataPenghijauan) {
+                var coordsPenghijauan = dataPenghijauan[i],
+                    marker = L.geoJSON(coordsPenghijauan)
+                markersLayer.addLayer(marker)
+                // console.log(coordsPenghijauan);
+
+                //Looping semua data dari table spot serta relasi ke tabel kategori
+                @foreach ($penghijauan as $data)
+                        var dataPenghijauanArray = L.geoJSON({!! $data->coordinates !!}, {
+                                                        style: {
+                                                            color: '{{ $data->fillColor }}',
+                                                            fillColor: '{{ $data->fillColor }}',
+                                                            fillOpacity: 0.15,
+                                                        },
+                                                    })
+                                                    .bindPopup("<div class='my-2'><strong>Laporan:</strong> <br>{{ $data->report_title }}</div>" +
+                                                        "<div class='my-2'><strong>Deskripsi Waktu:</strong> <br>{{ $data->date }}</div>" +
+                                                        "<div class='my-2'><strong>Deskripsi Lokasi:</strong> <br>{{ $data->description }}</div>"+
+                                                        "<a href='/viewreport' class='btn btn-primary'>Detail</a>"
+                                                    ).addTo(map);
+                        // var dataPenghijauanLayer = L.LayerGroup([dataPenghijauanArray]);
+                        // console.log(dataPenghijauanLayer);
+                    
+                @endforeach
+            }
+
+            // var overlayMaps = {
+            //     "Penghijauan": dataPenghijauanLayer
+            // };
+            // var layerControl = L.control.layers(baseLayers, overlayMaps).addTo(map);
     </script>
 </x-app-layout>
-
-

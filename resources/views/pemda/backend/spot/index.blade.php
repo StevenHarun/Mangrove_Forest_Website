@@ -1,9 +1,4 @@
 <x-app-layout>  
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -16,6 +11,7 @@
                         </x-link>
                     </button>
                 </div>
+                {{-- <a href="{{ url()->previous() }}" class="p-2 underline" >Back</a> --}}
                 <div class="p-2">
                     <table class="w-full">
                         <tr class="bg-[#DBEECB]">
@@ -33,11 +29,11 @@
                                     <td class="text-center p-2">{{$itemYear->year}}</td>
                                     <td class="text-center p-2 flex justify-center items-center gap-2">
                                         <button class="inline-flex items-center px-4 py-1 text-white bg-[#FFC700] border border-transparent rounded-md hover:border-[#FFC700] hover:bg-white hover:text-[#FFC700] transition ease-in-out duration-150">
-                                            <a href="{{ url('spot/details', $spot->slug), }}">
+                                            <a href="{{ route('spot.details', $spot->slug) }}">
                                                 {{ __('Update') }}
                                             </a>
                                         </button>
-                                        <form action="{{ url('spot', $spot->id), }}" method="post">
+                                        <form action="{{ route('spot.destroy', $spot->id), }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="inline-flex items-center px-4 py-1 text-white bg-[#E72929] border border-transparent rounded-md hover:border-[#E72929] hover:bg-white hover:text-[#E72929] transition ease-in-out duration-150">
