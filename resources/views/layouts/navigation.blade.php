@@ -1,18 +1,12 @@
-<nav x-data="{ open: false }" class="bg-white-border-b border-gray-100" style=" background-color: #DBEECB; margin-right:10px; margin-left:10px; border-radius: 10px;">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100" style="background-color: #DBEECB; margin-right: 0; margin-left: 0; padding-left: 10px; padding-right: 10px;">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                {{-- <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center mt-1">
                     <a href="{{ route('home') }}">
-                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
-                    {{-- </a> --}}
-                {{-- </div> --}}
-
-                <div class="shrink-0 flex items-center mt-11">
-                    <a href="{{ route('home') }}">
-                        <img src="{{ asset('images/Logo_Mangrove.png') }}" alt="Logo Mangrove" style="width: 250px; height: auto;">
+                        <img src="{{ asset('images/Logo_Mangrove_Crop.png') }}" alt="Logo Mangrove" style="width: 200px; height: auto;">
                     </a>
                 </div>     
 
@@ -30,10 +24,23 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="nav-link font-bold">
-                        {{ __('REPORTS') }}
-                    </x-nav-link>
-                </div>
+                    <!-- Tombol Dropdown -->                        
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="nav-link font-bold text-gray-700 font-bold focus:outline-none">
+                            {{ __('REPORTS') }}
+                        </button>
+                
+                        <!-- Dropdown Menu -->
+                        <div id="dropdown" class="absolute z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 mt-8">
+                            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+                                <li>
+                                    <a href="{{ route('report.create') }}" class="block px-4 py-2 hover:bg-gray-100">Add Report</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('viewreport') }}" class="block px-4 py-2 hover:bg-gray-100">Report History</a>
+                                </li>
+                            </ul>
+                        </div>
+                </div>                
             </div>
 
             <!-- Settings Dropdown -->
@@ -72,15 +79,8 @@
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-
+
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
@@ -116,3 +116,23 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Ambil tombol dropdown dan dropdown menu
+        const dropdownButton = document.getElementById('dropdownDefaultButton');
+        const dropdownMenu = document.getElementById('dropdown');
+
+        // Tambahkan event listener untuk menampilkan atau menyembunyikan dropdown saat tombol ditekan
+        dropdownButton.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        // Sembunyikan dropdown saat klik di luar dropdown menu
+        document.addEventListener('click', function (event) {
+            if (!dropdownMenu.contains(event.target) && !dropdownButton.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    });
+</script>
