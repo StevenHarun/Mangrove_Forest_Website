@@ -21,134 +21,30 @@ class HomeController extends Controller
 
             if($role=='User')
             {
-                {
-                    // Setting start and end dates
-                    $start = Carbon::parse(Reports::min("date"));
-                    $end = Carbon::now();
-                    // Creating period
-                    $period = CarbonPeriod::create($start, "1 month", $end);
-                    // Colleting period per month
-                    $reportsPerMonth = collect($period)->map(function ($date) {
-                        $endDate = $date->copy()->endOfMonth();
-                        $countPenghijauan = Reports::where("date", "<=", $endDate)
-                                                    ->where("category", "penghijauan")
-                                                    ->count();
-                        $countKerusakan = Reports::where("date", "<=", $endDate)
-                                                    ->where("category", "kerusakan")
-                                                    ->count();
-            
-                        return [
-                            "penghijauan" => $countPenghijauan,
-                            "kerusakan" => $countKerusakan,
-                            "month" => $endDate->format("Y-m-d")
-                        ];
-                    });
-            
-                    // Extracting data for the chart
-                    $dataPenghijauan = $reportsPerMonth->pluck("penghijauan")->toArray();
-                    $dataKerusakan = $reportsPerMonth->pluck("kerusakan")->toArray();
-                    $labels = $reportsPerMonth->pluck("month")->toArray();
-            
-                    // Creating penghijauan chart
-                    $chartPenghijauan = app()
-                        ->chartjs->name("PenghijauanChart")
-                        ->type("line")
-                        ->size(["width" => 400, "height" => 200])
-                        ->labels($labels)
-                        ->datasets([
-                            [
-                                "label" => "Penghijauan",
-                                "backgroundColor" => "rgba(75, 192, 192, 0.2)",
-                                "borderColor" => "rgba(75, 192, 192, 1)",
-                                "data" => $dataPenghijauan
-                            ]
-                        ])
-                        ->options([
-                            'scales' => [
-                                'x' => [
-                                    'type' => 'time',
-                                    'time' => [
-                                        'unit' => 'month'
-                                    ],
-                                    'min' => $start->format("Y-m-d"),
-                                ]
-                            ],
-                            'plugins' => [
-                                'title' => [
-                                    'display' => true,
-                                    'text' => 'Monthly Reports for Penghijauan Category'
-                                ]
-                            ]
-                        ]);
-    
-                        // Creating kerusakan chart
-                        $chartKerusakan = app()
-                            ->chartjs->name("KerusakanChart")
-                            ->type("bar")
-                            ->size(["width" => 400, "height" => 200])
-                            ->labels($labels)
-                            ->datasets([
-                                [
-                                    "label" => "Kerusakan",
-                                    "backgroundColor" => "rgba(255, 99, 132, 0.2)",
-                                    "borderColor" => "rgba(255, 99, 132, 1)",
-                                    "data" => $dataKerusakan
-                                ]
-                            ])
-                            ->options([
-                                'scales' => [
-                                    'x' => [
-                                        'type' => 'time',
-                                        'time' => [
-                                            'unit' => 'month'
-                                        ],
-                                        'min' => $start->format("Y-m-d"),
-                                    ]
-                                ],
-                                'plugins' => [
-                                    'title' => [
-                                        'display' => true,
-                                        'text' => 'Monthly Reports for Kerusakan Category'
-                                    ]
-                                ]
-                            ]);
-                        return view('user.user-dashboard', compact(["chartPenghijauan", "chartKerusakan"]));
-                }
-            }
-            else if($role=='Admin')
-            {
-                return view('admin.admin-dashboard');
-            }   
-            else if($role=='Pemda')
-            {
-                // Setting start and end dates
                 $start = Carbon::parse(Reports::min("date"));
                 $end = Carbon::now();
-                // Creating period
-                $period = CarbonPeriod::create($start, "1 month", $end);
-                // Colleting period per month
-                $reportsPerMonth = collect($period)->map(function ($date) {
-                    $endDate = $date->copy()->endOfMonth();
+                $period = CarbonPeriod::create($start, "1 year", $end);
+                
+                $reportsPerYear = collect($period)->map(function ($date) {
+                    $endDate = $date->copy()->endOfYear();
                     $countPenghijauan = Reports::where("date", "<=", $endDate)
                                                 ->where("category", "penghijauan")
                                                 ->count();
                     $countKerusakan = Reports::where("date", "<=", $endDate)
                                                 ->where("category", "kerusakan")
                                                 ->count();
-        
+                
                     return [
                         "penghijauan" => $countPenghijauan,
                         "kerusakan" => $countKerusakan,
-                        "month" => $endDate->format("Y-m-d")
+                        "year" => $endDate->format("Y")
                     ];
                 });
-        
-                // Extracting data for the chart
-                $dataPenghijauan = $reportsPerMonth->pluck("penghijauan")->toArray();
-                $dataKerusakan = $reportsPerMonth->pluck("kerusakan")->toArray();
-                $labels = $reportsPerMonth->pluck("month")->toArray();
-        
-                // Creating penghijauan chart
+                
+                $dataPenghijauan = $reportsPerYear->pluck("penghijauan")->toArray();
+                $dataKerusakan = $reportsPerYear->pluck("kerusakan")->toArray();
+                $labels = $reportsPerYear->pluck("year")->toArray();
+                
                 $chartPenghijauan = app()
                     ->chartjs->name("PenghijauanChart")
                     ->type("line")
@@ -167,7 +63,7 @@ class HomeController extends Controller
                             'x' => [
                                 'type' => 'time',
                                 'time' => [
-                                    'unit' => 'month'
+                                    'unit' => 'year'
                                 ],
                                 'min' => $start->format("Y-m-d"),
                             ]
@@ -175,43 +71,137 @@ class HomeController extends Controller
                         'plugins' => [
                             'title' => [
                                 'display' => true,
-                                'text' => 'Monthly Reports for Penghijauan Category'
+                                'text' => 'Yearly Reports for Penghijauan Category'
                             ]
                         ]
                     ]);
-
-                    // Creating kerusakan chart
-                        $chartKerusakan = app()
-                            ->chartjs->name("KerusakanChart")
-                            ->type("bar")
-                            ->size(["width" => 400, "height" => 200])
-                            ->labels($labels)
-                            ->datasets([
-                                [
-                                    "label" => "Kerusakan",
-                                    "backgroundColor" => "rgba(255, 99, 132, 0.2)",
-                                    "borderColor" => "rgba(255, 99, 132, 1)",
-                                    "data" => $dataKerusakan
-                                ]
-                            ])
-                        ->options([
-                            'scales' => [
-                                'x' => [
-                                    'type' => 'time',
-                                    'time' => [
-                                        'unit' => 'month'
-                                    ],
-                                    'min' => $start->format("Y-m-d"),
-                                ]
-                            ],
-                            'plugins' => [
-                                'title' => [
-                                    'display' => true,
-                                    'text' => 'Monthly Reports for Kerusakan Category'
-                                ]
+                
+                $chartKerusakan = app()
+                    ->chartjs->name("KerusakanChart")
+                    ->type("bar")
+                    ->size(["width" => 400, "height" => 200])
+                    ->labels($labels)
+                    ->datasets([
+                        [
+                            "label" => "Kerusakan",
+                            "backgroundColor" => "rgba(255, 99, 132, 0.2)",
+                            "borderColor" => "rgba(255, 99, 132, 1)",
+                            "data" => $dataKerusakan
+                        ]
+                    ])
+                    ->options([
+                        'scales' => [
+                            'x' => [
+                                'type' => 'time',
+                                'time' => [
+                                    'unit' => 'year'
+                                ],
+                                'min' => $start->format("Y-m-d"),
                             ]
-                        ]);
-                    return view('pemda.pemda-dashboard', compact(["chartPenghijauan", "chartKerusakan"]));
+                        ],
+                        'plugins' => [
+                            'title' => [
+                                'display' => true,
+                                'text' => 'Yearly Reports for Kerusakan Category'
+                            ]
+                        ]
+                    ]);
+                
+                return view('user.user-dashboard', compact(["chartPenghijauan", "chartKerusakan"]));
+            }
+            else if($role=='Admin')
+            {
+                return view('admin.admin-dashboard');
+            }   
+            else if($role=='Pemda')
+            {
+                $start = Carbon::parse(Reports::min("date"));
+                $end = Carbon::now();
+                $period = CarbonPeriod::create($start, "1 year", $end);
+                
+                $reportsPerYear = collect($period)->map(function ($date) {
+                    $endDate = $date->copy()->endOfYear();
+                    $countPenghijauan = Reports::where("date", "<=", $endDate)
+                                                ->where("category", "penghijauan")
+                                                ->count();
+                    $countKerusakan = Reports::where("date", "<=", $endDate)
+                                                ->where("category", "kerusakan")
+                                                ->count();
+                
+                    return [
+                        "penghijauan" => $countPenghijauan,
+                        "kerusakan" => $countKerusakan,
+                        "year" => $endDate->format("Y")
+                    ];
+                });
+                
+                $dataPenghijauan = $reportsPerYear->pluck("penghijauan")->toArray();
+                $dataKerusakan = $reportsPerYear->pluck("kerusakan")->toArray();
+                $labels = $reportsPerYear->pluck("year")->toArray();
+                
+                $chartPenghijauan = app()
+                    ->chartjs->name("PenghijauanChart")
+                    ->type("line")
+                    ->size(["width" => 400, "height" => 200])
+                    ->labels($labels)
+                    ->datasets([
+                        [
+                            "label" => "Penghijauan",
+                            "backgroundColor" => "rgba(75, 192, 192, 0.2)",
+                            "borderColor" => "rgba(75, 192, 192, 1)",
+                            "data" => $dataPenghijauan
+                        ]
+                    ])
+                    ->options([
+                        'scales' => [
+                            'x' => [
+                                'type' => 'time',
+                                'time' => [
+                                    'unit' => 'year'
+                                ],
+                                'min' => $start->format("Y-m-d"),
+                            ]
+                        ],
+                        'plugins' => [
+                            'title' => [
+                                'display' => true,
+                                'text' => 'Yearly Reports for Penghijauan Category'
+                            ]
+                        ]
+                    ]);
+                
+                $chartKerusakan = app()
+                    ->chartjs->name("KerusakanChart")
+                    ->type("bar")
+                    ->size(["width" => 400, "height" => 200])
+                    ->labels($labels)
+                    ->datasets([
+                        [
+                            "label" => "Kerusakan",
+                            "backgroundColor" => "rgba(255, 99, 132, 0.2)",
+                            "borderColor" => "rgba(255, 99, 132, 1)",
+                            "data" => $dataKerusakan
+                        ]
+                    ])
+                    ->options([
+                        'scales' => [
+                            'x' => [
+                                'type' => 'time',
+                                'time' => [
+                                    'unit' => 'year'
+                                ],
+                                'min' => $start->format("Y-m-d"),
+                            ]
+                        ],
+                        'plugins' => [
+                            'title' => [
+                                'display' => true,
+                                'text' => 'Yearly Reports for Kerusakan Category'
+                            ]
+                        ]
+                    ]);
+                
+                return view('pemda.pemda-dashboard', compact(["chartPenghijauan", "chartKerusakan"]));
             }
             else
             {

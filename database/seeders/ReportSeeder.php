@@ -16,9 +16,15 @@ class ReportSeeder extends Seeder
      */
     public function run(): void
     {
-        // start date (1-1-2024)
-        $startDate = Carbon::create(2024, 1, 1);
-        // looping 50 dummy data
+        function getRandomDate($startDate, $endDate) {
+            return $startDate->copy()->addDays(rand(0, $startDate->diffInDays($endDate)))->format('Y-m-d');
+        }
+        
+        // Gap date
+        $startDate = Carbon::create(2019, 1, 1);
+        $endDate = Carbon::create(2024, 6, 6);
+        
+        // Seeder for "Kerusakan"
         for ($i = 1; $i <= 50; $i++) {
             reports::create([
                 'report_title' => 'Kerusakan ' . $i,
@@ -37,15 +43,13 @@ class ReportSeeder extends Seeder
                     ]
                 ]),
                 'fillColor' => '#E78413',
-                'date' => $startDate->copy()->addDays(rand(0, 120))->format('Y-m-d'),
+                'date' => getRandomDate($startDate, $endDate),
                 'description' => 'Kerusakan yang terjadi di lokasi ' . $i
             ]);
         }
-
-        // start date (1-1-2024)
-        $startDate = Carbon::create(2024, 1, 1);
+        
+        // Seeder for "Penghijauan"
         for ($i = 1; $i <= 50; $i++) {
-        // looping 50 dummy data
             reports::create([
                 'report_title' => 'Penghijauan ' . $i,
                 'category' => 'Penghijauan',
@@ -63,7 +67,7 @@ class ReportSeeder extends Seeder
                     ]
                 ]),
                 'fillColor' => '#11D44C',
-                'date' => $startDate->copy()->addDays(rand(0, 120))->format('Y-m-d'),
+                'date' => getRandomDate($startDate, $endDate),
                 'description' => 'Penghijauan yang dilakukan di lokasi ' . $i
             ]);
         }
