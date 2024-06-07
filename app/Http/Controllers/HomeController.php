@@ -286,7 +286,9 @@ class HomeController extends Controller
                         ]
                     ]);
 
-                return view('pemda.pemda-dashboard', compact(["chartPenghijauan", "chartKerusakan", "chartSpots"]));
+                return view('pemda.pemda-dashboard', compact(["chartPenghijauan", "chartKerusakan", "chartSpots"]), [
+                    'kilo' => array_sum($areaInSquareKilometers) 
+                ]);
             }
             else
             {
