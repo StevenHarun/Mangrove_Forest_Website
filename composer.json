@@ -9,7 +9,8 @@
         "fx3costa/laravelchartjs": "^1.0",
         "icehouse-ventures/laravel-chartjs": "^1.1",
         "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "league/geotools": "^0.1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

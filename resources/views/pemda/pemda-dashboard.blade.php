@@ -30,6 +30,13 @@
                         {!! $chartKerusakan->render() !!}
                     </div>
                 </div>
+                <div class="p-6 text-gray-900 grid grid-cols-2 h-auto">
+                    <div class="w-full h-full p-4">
+                        {!! $chartSpots->render() !!}
+                    </div>
+                    <div class="w-full h-full p-4">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
