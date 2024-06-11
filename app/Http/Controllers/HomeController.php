@@ -43,6 +43,69 @@ class HomeController extends Controller
 
             if($role=='User')
             {
+                // Ambil data tahun dari database
+                $years = Year::all()->pluck('year')->toArray();
+
+                $labelSpots = array_map(function($year) {
+                    return "$year";
+                }, $years);
+
+                // Data GeoJSON untuk chart spot
+                $geojsons = Spot::all()->pluck('coordinates');
+                
+                // Array untuk menyimpan hasil luas masing-masing GeoJSON
+                $areas = [];
+
+                // Mendekode data GeoJSON dan menghitung luas masing-masing
+                foreach ($geojsons as $index => $geojson) {
+                    $data = json_decode($geojson, true);
+                    $totalAreaInSquareMeters = 0;
+
+                    foreach ($data['features'] as $feature) {
+                        if (isset($feature['geometry']['coordinates'][0])) {
+                            $coordinates = $feature['geometry']['coordinates'][0];
+                            $totalAreaInSquareMeters += $this->calculatePolygonArea($coordinates);
+                        }
+                    }
+
+                    $totalAreaInSquareKilometers = $totalAreaInSquareMeters / 1e6; // Konversi ke kilometer persegi
+
+                    // Menyimpan hasil luas untuk GeoJSON ini
+                    $areas[] = [
+                        'geojsonIndex' => $index,
+                        'areaInSquareMeters' => $totalAreaInSquareMeters,
+                        'areaInSquareKilometers' => $totalAreaInSquareKilometers
+                    ];
+                }
+
+                // Hanya mengakses value dari areaInSquareKilometers
+                $areaInSquareKilometers = array_map(function ($area) {
+                    return $area['areaInSquareKilometers'];
+                }, $areas); 
+
+                $chartSpots = app()
+                    ->chartjs->name("SpotsChart")
+                    ->type("bar")
+                    ->size(["width" => 400, "height" => 200])
+                    ->labels($labelSpots)
+                    ->datasets([
+                        [
+                            "label" => "Spots area in Kilometer",
+                            "backgroundColor" => "rgba(75, 192, 192, 0.2)",
+                            "borderColor" => "rgba(75, 192, 192, 1)",
+                            "data" => $areaInSquareKilometers
+                        ]
+                    ])
+                    ->options([
+                        'plugins' => [
+                            'title' => [
+                                'display' => true,
+                                'text' => 'Yearly Spots Area'
+                            ]
+                        ]
+                    ]);
+
+                // chart report
                 $start = Carbon::parse(Reports::min("date"));
                 $end = Carbon::now();
                 $period = CarbonPeriod::create($start, "1 year", $end);
@@ -129,7 +192,9 @@ class HomeController extends Controller
                         ]
                     ]);
                 
-                return view('user.user-dashboard', compact(["chartPenghijauan", "chartKerusakan"]));
+                    return view('user.user-dashboard', compact(["chartPenghijauan", "chartKerusakan", "chartSpots"]), [
+                        'kilo' => array_sum($areaInSquareKilometers) 
+                    ]);
             }
             else if($role=='Admin')
             {

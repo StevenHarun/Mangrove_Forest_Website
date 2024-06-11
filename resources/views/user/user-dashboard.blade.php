@@ -24,6 +24,24 @@
                 </div>
                 <div class="p-6 text-gray-900 grid grid-cols-2 h-auto">
                     <div class="w-full h-full p-4">
+                        {!! $chartSpots->render() !!}
+                    </div>
+                    <div class="w-full h-full p-4 flex justify-center items-center">
+                        <div class="w-52 h-24 bg-[#4BC0C0] rounded-md text-center p-3">
+                            <h1 class="text-2xl font-bold mb-2">Total luas hutan</h1>
+                            <p class="font-bold">
+                                {{ $kilo }} KM
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <div class="bg-[#75B896] text-white text-center text-3xl font-bold h-[75px] w-[870px] flex justify-center items-center rounded-2xl">
+                        <h1>Data Statistik Laporan </h1>
+                    </div>
+                </div>
+                <div class="p-6 text-gray-900 grid grid-cols-2 h-auto">
+                    <div class="w-full h-full p-4">
                         {!! $chartPenghijauan->render() !!} 
                     </div>
                     <div class="w-full h-full p-4">
