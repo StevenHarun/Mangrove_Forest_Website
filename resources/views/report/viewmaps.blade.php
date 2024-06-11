@@ -34,8 +34,7 @@
                 <div class="w-full h-16 p-4 flex gap-4 items-center justify-center">
                     <div class="flex justify-center items-center gap-2">
                         <div class="bg-[#11D44C] h-4 w-4"></div>
-                        <p>Penghijauan
-                    </div>
+                        <p>Penghijauan</p>
                     <div class="flex justify-center items-center gap-2">
                         <div class="bg-[#E78413] h-4 w-4"></div>
                         <p>Kerusakan</p>
